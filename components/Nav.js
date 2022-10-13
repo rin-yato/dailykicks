@@ -16,7 +16,7 @@ function Nav() {
     <nav
       className="
     bg-white px-3 pr-2.5 p-1 w-screen flex justify-between items-center
-      fixed top-0 left-0 "
+      fixed top-0 left-0 z-50"
     >
       <Image
         src="/images/logo.jpeg"
