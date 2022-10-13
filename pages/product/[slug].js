@@ -29,10 +29,10 @@ export default function ProductDetail(props) {
                 className="min-w-min rounded-full p-2"
                 onClick={() => router.back()}
               >
-                <i className="bx bx-arrow-back bx-sm text-black"></i>
+                <i className="bx bx-arrow-back bx-md text-black"></i>
               </Button>
               <Button className="min-w-min rounded-full p-2">
-                <i className="bx bx-heart bx-sm text-black"></i>
+                <i className="bx bx-heart bx-md text-black"></i>
               </Button>
             </div>
             <img src="/sneakers/air-force-grey.png" className="" />
@@ -88,12 +88,12 @@ export default function ProductDetail(props) {
               </p>
             </div>
             <div className="flex my-2 mt-5 w-full gap-4">
-              <ButtonBase className="w-full rounded-full py-2 bg-green-500 font-semibold text-white" href="tel:0188257038">
-                <i className="bx bxs-phone bx-xs -translate-x-1.5"></i>
+              <ButtonBase className="w-full rounded-full py-3 bg-green-500 font-semibold text-white" href="tel:0188257038">
+                <i className="bx bxs-phone bx-md -translate-x-1.5"></i>
                 Call
               </ButtonBase>
-              <ButtonBase className="w-full rounded-full py-2 bg-indigo-500 font-semibold text-white" href="https://t.me/rinyato" target="_blank">
-                <i className="bx bxl-telegram bx-xs -translate-x-1.5"></i>
+              <ButtonBase className="w-full rounded-full py-3 bg-indigo-500 font-semibold text-white" href="https://t.me/rinyato" target="_blank">
+                <i className="bx bxl-telegram bx-md -translate-x-1.5"></i>
                 Chat
               </ButtonBase>
             </div>
