@@ -29,3 +29,27 @@ a {
     background: black;
   }
 } */
+
+.no-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.mui-style-mm42gz-MuiButtonBase-root-MuiFab-root {
+  background-color: #F1F5F9;
+}
+
+
+.mui-style-mm42gz-MuiButtonBase-root-MuiFab-root:hover {
+  background-color: #BAE6FD !important;
+}
+
+.mui-style-mm42gz-MuiButtonBase-root-MuiFab-root:active {
+  box-shadow: inherit !important;
+}
+
+@media (hover: none) {
+  .mui-style-mm42gz-MuiButtonBase-root-MuiFab-root:hover {
+    background-color: #BAE6FD !important;
+  }
+}
+
