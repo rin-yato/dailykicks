@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/images/favicon.png" />
       </Head>
 
-      <main className="pt-[50px] h-screen w-screen">
+      <main className="pt-[50px] h-screen w-screen box-border">
         <div className="flex flex-col h-full">
           <div className="h-1/2 w-full bg-teal-300 flex items-center justify-center overflow-hidden p-7 relative">
             <img src="/sneakers/air-force-grey.png" className="-translate-x-1 scale-125 -translate-y-3 drop-shadow-[-10px_15px_5px_rgb(0,0,0,0.1)]" />
