@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useRef } from "react";
 import NoNav from "../../layouts/NoNav";
 import { useRouter } from "next/router";
 import { Button, ButtonBase, Fab, Rating } from "@mui/material";
 
 export default function ProductDetail(props) {
   const router = useRouter();
+  const [activeSize, setActiveSize] = React.useState(0);
 
-  const selectSize = (e) => {
-    // get all siblings of the clicked element
-    const siblings = e.target.parentNode.children;
-    // remove the active class from all siblings
-    for (let i = 0; i < siblings.length; i++) {
-      siblings[i].classList.remove("bg-sky-200");
-    }
-    e.target.classList.add("bg-sky-200");
+  const handleLike = (e) => {
+    e.target.classList.toggle("text-red-500");
+    e.target.classList.toggle("bxs-heart");
+  };
+
+  const selectSize = (size) => {
+    setActiveSize(size);
   };
 
   // sizes from 33 to 44
@@ -32,7 +32,10 @@ export default function ProductDetail(props) {
                 <i className="bx bx-arrow-back bx-md text-black"></i>
               </Button>
               <Button className="min-w-min rounded-full p-2">
-                <i className="bx bx-heart bx-md text-black"></i>
+                <i
+                  className="bx bx-heart bx-md text-black active:animate-ping"
+                  onClick={handleLike}
+                ></i>
               </Button>
             </div>
             <img src="/sneakers/air-force-grey.png" className="" />
@@ -65,15 +68,17 @@ export default function ProductDetail(props) {
             <div className="my-2 w-full">
               <p className="text-lg">Available Size</p>
               <div className="overflow-x-scroll no-scroll" draggable="true">
-                <div className="mt-1.5 flex w-max">
+                <div className="mt-1.5 grid grid-cols-4 gap-4">
                   {sizes.map((size) => (
-                    <Fab
-                      className="text-black m-1 shadow-md"
+                    <ButtonBase
                       key={size}
-                      onClick={selectSize}
+                      className={`min-w-full py-2 ${
+                        activeSize === size ? "bg-sky-200" : "bg-slate-100"
+                      } rounded`}
+                      onClick={() => setActiveSize(size)}
                     >
                       {size}
-                    </Fab>
+                    </ButtonBase>
                   ))}
                 </div>
               </div>
@@ -88,11 +93,18 @@ export default function ProductDetail(props) {
               </p>
             </div>
             <div className="flex my-2 mt-5 w-full gap-4">
-              <ButtonBase className="w-full rounded-full py-3 bg-green-500 font-semibold text-white" href="tel:0188257038">
+              <ButtonBase
+                className="w-full rounded-full py-3 bg-green-500 font-semibold text-white"
+                href="tel:0188257038"
+              >
                 <i className="bx bxs-phone bx-md -translate-x-1.5"></i>
                 Call
               </ButtonBase>
-              <ButtonBase className="w-full rounded-full py-3 bg-indigo-500 font-semibold text-white" href="https://t.me/rinyato" target="_blank">
+              <ButtonBase
+                className="w-full rounded-full py-3 bg-sky-500 font-semibold text-white"
+                href="https://t.me/rinyato"
+                target="_blank"
+              >
                 <i className="bx bxl-telegram bx-md -translate-x-1.5"></i>
                 Chat
               </ButtonBase>
