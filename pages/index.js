@@ -13,7 +13,7 @@ export default function Home() {
           className="w-full h-[60vh] relative flex flex-col justify-end items-center"
           id="hero"
         >
-          <div className="absolute -z-[1] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-thin text-white text-[11rem] text-stroke">
+          <div className="absolute -z-[1] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-thin text-white text-[15rem] text-stroke">
             A<span className=" z-10">I</span>R
           </div>
           <img
