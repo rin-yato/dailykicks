@@ -8,8 +8,8 @@ export default function ProductDetail(props) {
   const [activeSize, setActiveSize] = React.useState(0);
 
   const handleLike = (e) => {
-    e.target.classList.toggle("text-red-500");
     e.target.classList.toggle("bxs-heart");
+    e.target.classList.toggle("text-red-600");
   };
 
   const selectSize = (size) => {
@@ -21,7 +21,7 @@ export default function ProductDetail(props) {
 
   return (
     <NoNav>
-      <div className="w-screen flex flex-col">
+      <div className="w-screen flex flex-col bg-slate-100">
         <div className="flex flex-col items-center justify-center p-3">
           <div className="bg-slate-200 rounded-2xl relative">
             <div className="absolute top-0.5 left-0 right-0 flex justify-between py-1 px-2">
@@ -72,8 +72,8 @@ export default function ProductDetail(props) {
                   {sizes.map((size) => (
                     <ButtonBase
                       key={size}
-                      className={`min-w-full py-2 ${
-                        activeSize === size ? "bg-sky-200" : "bg-slate-100"
+                      className={`min-w-full py-2.5 ${
+                        activeSize === size ? "bg-sky-200" : "bg-slate-200"
                       } rounded`}
                       onClick={() => setActiveSize(size)}
                     >
@@ -94,14 +94,14 @@ export default function ProductDetail(props) {
             </div>
             <div className="flex my-2 mt-5 w-full gap-4">
               <ButtonBase
-                className="w-full rounded-full py-3 bg-green-500 font-semibold text-white"
+                className="w-full rounded-full py-2 bg-green-500 font-semibold text-white"
                 href="tel:0188257038"
               >
                 <i className="bx bxs-phone bx-md -translate-x-1.5"></i>
                 Call
               </ButtonBase>
               <ButtonBase
-                className="w-full rounded-full py-3 bg-sky-500 font-semibold text-white"
+                className="w-full rounded-full py-2 bg-sky-500 font-semibold text-white"
                 href="https://t.me/rinyato"
                 target="_blank"
               >
