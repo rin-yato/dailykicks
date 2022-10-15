@@ -12,6 +12,7 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useContext } from "react";
 import { Context } from "../layouts/Layout";
+import Link from "next/link";
 
 export default function Aside() {
   const { isOpen, setValue } = useContext(Context);
@@ -37,18 +38,20 @@ export default function Aside() {
       role="presentation"
       onKeyDown={toggleDrawer(false)}
     >
-      <Button className="float-right z-30 p-1 mr-1.5 mt-1 min-w-min min-h-min rounded-full" onClick={toggleDrawer(false, 250)}>
+      <Button className="float-right z-30 p-1 mr-1.5 mt-1 min-w-min min-h-min rounded-full" onClick={toggleDrawer(false, 50)}>
         <i className="bx bx-x bx-sm text-black"></i>
       </Button>
       <List className="pt-20">
         {["Sneakers", "Accessories", "About", "Contact"].map((text, index) => (
-          <ListItem button key={text} className="my-4">
-            <ListItemText
-              primary={text}
-              disableTypography
-              className=" text-center font-semibold"
-            />
-          </ListItem>
+          <Link href={`/${text.toLowerCase()}`} key={text}>
+            <ListItem button key={text} className="my-4">
+              <ListItemText
+                primary={text}
+                disableTypography
+                className=" text-center font-semibold"
+              />
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Box>
