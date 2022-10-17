@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
+
 /* eslint-disable @next/next/no-img-element */
 import { ButtonBase, Rating } from "@mui/material";
 import React from "react";
@@ -52,7 +53,7 @@ function DetailProduct(props) {
                 </p>
               </div>
             </div>
-            {/* <div className="flex items-center my-2">
+            <div className="flex items-center my-2">
               <Rating
                 name="read-only"
                 value={4.5}
@@ -63,12 +64,12 @@ function DetailProduct(props) {
               <p className="text-xs font-semibold text-slate-400 ml-1">
                 4.5 / 5
               </p>
-            </div> */}
+            </div>
             <div className="flex items-center">
               <p className=" text-black text-2xl font-bold mr-3">${ props.product.price }</p>
               <p className=" line-through text-base text-slate-600">$1{ props.product.oldPrice }</p>
             </div>
-            {/* <div className="my-2 w-full">
+            <div className="my-2 w-full">
               <p className="text-lg">Available Size</p>
               <div className="overflow-x-scroll no-scroll" draggable="true">
                 <div className="mt-1.5 grid grid-cols-4 gap-4">
@@ -85,7 +86,7 @@ function DetailProduct(props) {
                   ))}
                 </div>
               </div>
-            </div> */}
+            </div>
             <div className="my-2">
               <p className="text-lg">Description</p>
               <p className="text-sm text-slate-400">
@@ -137,6 +138,6 @@ export async function getStaticProps(Context) {
 export async function getStaticPaths() {
   return {
     paths: [{ params: { id: "1" } }],
-    fallback: true,
+    fallback: 'blocking',
   };
 }
