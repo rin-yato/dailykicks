@@ -11,17 +11,17 @@ export default function Home() {
     <Layout>
       <main className="min-h-screen w-screen overflow-x-hidden">
         <section
-          className="w-full h-[60vh] relative flex flex-col justify-end items-center"
+          className="w-full h-[65vh] relative flex flex-col justify-end items-center"
           id="hero"
         >
-          <div className="absolute -z-[1] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-thin text-white text-[15rem] text-stroke">
-            A<span className=" z-10">I</span>R
+          <div className="relative mt-10 leading-[11rem] font-thin text-white text-[15rem] text-stroke">
+            AIR
+            <img
+              src="/sneakers/air-force-blue.png"
+              alt=""
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[23%]"
+            />
           </div>
-          <img
-            src="/sneakers/air-force-blue.png"
-            alt=""
-            className="absolute - top-1/2 left-1/2 -translate-x-1/2 -translate-y-[56%]"
-          />
           <p className="p-6 text-center font-[500] leading-snug pb-4">
             We provide the latest and greatest sneakers, with premium quality
             from the best brands.
