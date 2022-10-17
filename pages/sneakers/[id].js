@@ -27,7 +27,7 @@ function DetailProduct(props) {
     <NoNav>
       <div className="w-screen flex flex-col bg-slate-400">
         <div className="flex flex-col items-center justify-center pt-[56px]">
-          <div className="fixed top-0 left-0 right-0 z-50 bg-white flex justify-between items-center py-1 px-3">
+          <div className="fixed h-[56px] top-0 left-0 right-0 z-50 bg-white flex justify-between items-center py-1 px-3">
             <ButtonBase
               className="min-w-min h-min rounded-full p-1.5 bg-white"
               onClick={() => router.back()}
