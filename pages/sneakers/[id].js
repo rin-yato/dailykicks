@@ -26,30 +26,41 @@ function DetailProduct(props) {
   return (
     <NoNav>
       <div className="w-screen flex flex-col bg-white">
-        <div className="flex flex-col items-center justify-center p-3">
-          <div className="bg-slate-200 rounded-2xl relative">
-            <div className="absolute top- left-0 right-0 flex justify-between items-start py-2.5 px-3">
-              <ButtonBase
-                className="min-w-min h-min rounded-full p-1.5 bg-white"
-                onClick={() => router.back()}
-              >
-                <i className="bx bx-left-arrow-alt bx-sm text-black"></i>
-              </ButtonBase>
-              <ButtonBase className="min-w-min rounded-full p-1 bg-white">
-                <i
-                  className="bx bxs-heart bx-sm text-slate-700"
-                  onClick={handleLike}
-                ></i>
-              </ButtonBase>
-            </div>
-            <img src={props.product.image} className="rounded-lg" />
+        <div className="flex flex-col items-center justify-center pt-[51px]">
+          <div className="fixed top-0 left-0 right-0 z-50 bg-white flex justify-between items-center py-0.5 px-3">
+            <ButtonBase
+              className="min-w-min h-min rounded-full p-1.5 bg-white"
+              onClick={() => router.back()}
+            >
+              <i className="bx bxs-chevron-left bx-sm text-black"></i>
+            </ButtonBase>
+            {/* <ButtonBase className="min-w-min rounded-full p-1 bg-white">
+              <i
+                className="bx bxs-heart bx-sm text-slate-700"
+                onClick={handleLike}
+              ></i>
+            </ButtonBase> */}
+            <h4 className="uppercase font-semibold">Nike</h4>
+            <ButtonBase className="min-w-min h-min rounded-full p-1.5 bg-white">
+              <i className="bx bxs-share-alt bx-sm text-black"></i>
+            </ButtonBase>
           </div>
-          <div className="w-full flex flex-col items-start justify-center p-3">
+          <div className="bg-slate-200 relative">
+            <img src={props.product.image} className="" />
+          </div>
+          <div className="w-full flex flex-col items-start justify-center px-4 pt-4">
             <div className="flex justify-between items-start w-full">
               <div className="">
-                <p className="text-sm text-black ml-0.5">Nike</p>
-                <p className="text-2xl font-bold text-black leading-[1.1]">
+                <p className="text-xl font-bold text-black">
                   {props.product.name}
+                </p>
+              </div>
+              <div className="flex flex-col items-center justify-end">
+                {/* <p className=" line-through text-sm text-slate-600">
+                  ${props.product.oldPrice}
+                </p> */}
+                <p className=" text-red-600 text-md font-bold bg-red-100 px-4 py-0.5 rounded">
+                  ${props.product.price}
                 </p>
               </div>
             </div>
@@ -65,10 +76,7 @@ function DetailProduct(props) {
                 4.5 / 5
               </p>
             </div> */}
-            <div className="flex items-center">
-              <p className=" text-black text-2xl font-bold mr-3">${ props.product.price }</p>
-              <p className=" line-through text-base text-slate-600">${ props.product.oldPrice }</p>
-            </div>
+
             {/* <div className="my-2 w-full">
               <p className="text-lg">Available Size</p>
               <div className="overflow-x-scroll no-scroll" draggable="true">
@@ -136,7 +144,6 @@ export async function getStaticProps(Context) {
 }
 
 export async function getStaticPaths() {
-
   const paths = sneakers.map((sneaker) => ({
     params: { id: sneaker.id.toString() },
   }));
