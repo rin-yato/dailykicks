@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 
 /* eslint-disable @next/next/no-img-element */
-import { ButtonBase, Rating } from "@mui/material";
+import { Badge, ButtonBase, Rating } from "@mui/material";
 import React from "react";
 import NoNav from "../../layouts/NoNav";
 import sneakers from "../../src/shoes";
@@ -25,8 +25,8 @@ function DetailProduct(props) {
 
   return (
     <NoNav>
-      <div className="w-screen flex flex-col bg-slate-400">
-        <div className="flex flex-col items-center justify-center pt-[50px]">
+      <div className="w-screen flex flex-col">
+        <div className="flex flex-col items-center justify-center pt-[50px] pb-[60px]">
           <div className="fixed h-[50px] top-0 left-0 right-0 z-50 bg-white flex justify-between items-center py-1 px-3">
             <ButtonBase
               className="min-w-min h-min rounded-full p-1.5 bg-white"
@@ -48,7 +48,7 @@ function DetailProduct(props) {
           <div className="bg-slate-200 relative">
             <img src={props.product.image} className="" />
           </div>
-          <div className="w-full flex flex-col items-start justify-center px-4 pt-4">
+          <div className="w-full flex flex-col items-start justify-center px-5 pt-5">
             <div className="flex justify-between items-start w-full">
               <div className="">
                 <p className="text-xl font-bold text-black">
@@ -59,8 +59,11 @@ function DetailProduct(props) {
                 {/* <p className=" line-through text-sm text-slate-600">
                   ${props.product.oldPrice}
                 </p> */}
-                <p className=" text-red-600 text-md font-bold bg-red-100 px-4 py-0.5 rounded">
-                  ${props.product.price}
+                <p className="relative bg-indigo-100 text-indigo-500 shadow-md text-md font-bold  px-4 py-0.5 rounded">
+                  ${ props.product.price }
+                  <span className="text-[12px] line-through absolute top-0
+                  right-0 translate-x-1/2 -translate-y-1/2 bg-red-100 px-1 rounded-full text-red-500 shadow"
+                  >${ props.product.oldPrice }</span>
                 </p>
               </div>
             </div>
@@ -104,7 +107,7 @@ function DetailProduct(props) {
                 quaerat. Ut, distinctio placeat.
               </p>
             </div>
-            <div className="flex py-2 w-full gap-4">
+            <div className=" fixed bottom-0 left-0 px-4 h-[60px] flex py-1.5 w-full gap-4 bg-white">
               <ButtonBase
                 className="w-full shadow rounded-full py-1.5 bg-green-500 font-semibold text-white"
                 href="tel:0188257038"
