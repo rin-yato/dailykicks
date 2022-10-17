@@ -136,8 +136,13 @@ export async function getStaticProps(Context) {
 }
 
 export async function getStaticPaths() {
+  
+  const paths = sneakers.map((sneaker) => ({
+    params: { id: sneaker.id.toString() },
+  }));
+
   return {
-    paths: [{ params: { id: "1" } }],
-    fallback: 'blocking',
+    paths,
+    fallback: false,
   };
 }
