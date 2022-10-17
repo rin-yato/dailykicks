@@ -9,26 +9,26 @@ import { useRouter } from "next/router";
 
 function DetailProduct(props) {
   const router = useRouter();
-  const [activeSize, setActiveSize] = React.useState(0);
+  // const [activeSize, setActiveSize] = React.useState(0);
 
   const handleLike = (e) => {
     e.target.classList.toggle("text-slate-700");
     e.target.classList.toggle("text-red-500");
   };
 
-  const selectSize = (size) => {
-    setActiveSize(size);
-  };
+  // const selectSize = (size) => {
+  //   setActiveSize(size);
+  // };
 
-  // sizes from 33 to 44
-  const sizes = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
+  // // sizes from 33 to 44
+  // const sizes = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
 
   return (
     <NoNav>
       <div className="w-screen flex flex-col bg-white">
         <div className="flex flex-col items-center justify-center p-3">
           <div className="bg-slate-200 rounded-2xl relative">
-            <div className="absolute top-1 left-0 right-0 flex justify-between items-start py-1 px-2">
+            <div className="absolute top- left-0 right-0 flex justify-between items-start py-2.5 px-3">
               <ButtonBase
                 className="min-w-min h-min rounded-full p-1.5 bg-white"
                 onClick={() => router.back()}
@@ -53,7 +53,7 @@ function DetailProduct(props) {
                 </p>
               </div>
             </div>
-            <div className="flex items-center my-2">
+            {/* <div className="flex items-center my-2">
               <Rating
                 name="read-only"
                 value={4.5}
@@ -64,12 +64,12 @@ function DetailProduct(props) {
               <p className="text-xs font-semibold text-slate-400 ml-1">
                 4.5 / 5
               </p>
-            </div>
+            </div> */}
             <div className="flex items-center">
               <p className=" text-black text-2xl font-bold mr-3">${ props.product.price }</p>
-              <p className=" line-through text-base text-slate-600">$1{ props.product.oldPrice }</p>
+              <p className=" line-through text-base text-slate-600">${ props.product.oldPrice }</p>
             </div>
-            <div className="my-2 w-full">
+            {/* <div className="my-2 w-full">
               <p className="text-lg">Available Size</p>
               <div className="overflow-x-scroll no-scroll" draggable="true">
                 <div className="mt-1.5 grid grid-cols-4 gap-4">
@@ -86,7 +86,7 @@ function DetailProduct(props) {
                   ))}
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="my-2">
               <p className="text-lg">Description</p>
               <p className="text-sm text-slate-400">
@@ -96,16 +96,16 @@ function DetailProduct(props) {
                 quaerat. Ut, distinctio placeat.
               </p>
             </div>
-            <div className="flex px-4 py-3 w-full gap-4 fixed bottom-0 left-0">
+            <div className="flex py-2 w-full gap-4">
               <ButtonBase
-                className="w-full shadow rounded-full py-2 bg-green-500 font-semibold text-white"
+                className="w-full shadow rounded-full py-1.5 bg-green-500 font-semibold text-white"
                 href="tel:0188257038"
               >
                 <i className="bx bxs-phone bx-md -translate-x-1.5"></i>
                 Call
               </ButtonBase>
               <ButtonBase
-                className="w-full shadow rounded-full py-2 bg-sky-500 font-semibold text-white"
+                className="w-full shadow rounded-full py-1.5 bg-sky-500 font-semibold text-white"
                 href="https://t.me/rinyato"
                 target="_blank"
               >
@@ -136,7 +136,7 @@ export async function getStaticProps(Context) {
 }
 
 export async function getStaticPaths() {
-  
+
   const paths = sneakers.map((sneaker) => ({
     params: { id: sneaker.id.toString() },
   }));
