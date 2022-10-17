@@ -4,11 +4,12 @@ import { ButtonBase } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../layouts/Layout";
+import sneakers from "../src/shoes";
 
 export default function Home() {
   return (
     <Layout>
-      <main className="min-h-screen w-screen">
+      <main className="min-h-screen w-screen overflow-x-hidden">
         <section
           className="w-full h-[60vh] relative flex flex-col justify-end items-center"
           id="hero"
@@ -26,115 +27,66 @@ export default function Home() {
             from the best brands.
           </p>
           <ButtonBase className="bg-slate-800 py-1.5 px-4 rounded font-bold text-white mmb-[75px]">
-            SHOP NOW
+            SHOP NOW <i className="bx bx-right-arrow-alt bx-sm"></i>
           </ButtonBase>
         </section>
         <section id="featured" className="flex flex-col justify-center py-14">
           <h1 className="text-center font-extrabold text-3xl">Featured</h1>
           <h3 className="text-[10px] font-semibold text-center">PRODUCTS</h3>
           <div className="featured-container grid grid-cols-2 gap-3 px-3 mt-5">
-            <div className="product-card">
-              <div className="product-image overflow-hidden rounded-lg">
-                <img src="/sneakers/new-balanced.jpeg" alt="" />
-              </div>
-              <div className="product-info py-0.5 px-1.5">
-                <h1 className="product-name text-sm font-semibold">NewYork Balance</h1>
-                <div className="flex items-center">
-                  <h3 className="product-price font-semibold text-sm mr-1.5">$124</h3>
-                  <h3 className="text-xs line-through text-slate-500">$160</h3>
+            {sneakers.map((sneaker) => (
+              <Link href={`/sneakers/${sneaker.id}`} key={sneaker.id}>
+                <div className="product-card">
+                  <div className="product-image overflow-hidden rounded-lg">
+                    <img src={sneaker.image} alt="" />
+                  </div>
+                  <div className="product-info py-0.5 px-1.5">
+                    <h1 className="product-name text-sm font-semibold">
+                      {sneaker.name}
+                    </h1>
+                    <div className="flex items-center">
+                      <h3 className="product-price font-semibold text-sm mr-1.5">
+                        ${sneaker.price}
+                      </h3>
+                      <h3 className="text-xs line-through text-slate-500">
+                        ${sneaker.oldPrice}
+                      </h3>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="product-card">
-              <div className="product-image overflow-hidden rounded-lg">
-                <img src="/sneakers/jordan-idk.jpeg" alt="" />
-              </div>
-              <div className="product-info py-0.5 px-1.5">
-                <h1 className="product-name text-sm font-semibold">Jordan Sky-400</h1>
-                <div className="flex items-center">
-                  <h3 className="product-price font-semibold text-sm mr-1.5">$149</h3>
-                  <h3 className="text-xs line-through text-slate-500">$180</h3>
-                </div>
-              </div>
-            </div>
-            <div className="product-card">
-              <div className="product-image overflow-hidden rounded-lg">
-                <img src="/sneakers/just-do-it.jpeg" alt="" />
-              </div>
-              <div className="product-info py-0.5 px-1.5">
-                <h1 className="product-name text-sm font-semibold">AirForce 1</h1>
-                <div className="flex items-center">
-                  <h3 className="product-price font-semibold text-sm mr-1.5">$64</h3>
-                  <h3 className="text-xs line-through text-slate-500">$99</h3>
-                </div>
-              </div>
-            </div>
-            <div className="product-card">
-              <div className="product-image overflow-hidden rounded-lg">
-                <img src="/sneakers/thick-boys.jpeg" alt="" />
-              </div>
-              <div className="product-info py-0.5 px-1.5">
-                <h1 className="product-name text-sm font-semibold">Thick Boys</h1>
-                <div className="flex items-center">
-                  <h3 className="product-price font-semibold text-sm mr-1.5">$99</h3>
-                  <h3 className="text-xs line-through text-slate-500">$139</h3>
-                </div>
-              </div>
-            </div>
+              </Link>
+            ))}
           </div>
         </section>
-        <section id="best-sellers" className="flex flex-col justify-center pb-14 pt-5">
+        <section
+          id="best-sellers"
+          className="flex flex-col justify-center pb-14 pt-5"
+        >
           <h1 className="text-center font-extrabold text-3xl">Best Sellers</h1>
           <h3 className="text-[10px] font-semibold text-center">PRODUCTS</h3>
           <div className="featured-container grid grid-cols-2 gap-3 px-3 mt-5">
-            <div className="product-card">
-              <div className="product-image overflow-hidden rounded-lg">
-                <img src="/sneakers/new-balanced.jpeg" alt="" />
-              </div>
-              <div className="product-info py-0.5 px-1.5">
-                <h1 className="product-name text-sm font-semibold">NewYork Balance</h1>
-                <div className="flex items-center">
-                  <h3 className="product-price font-semibold text-sm mr-1.5">$124</h3>
-                  <h3 className="text-xs line-through text-slate-500">$160</h3>
+            {sneakers.map((sneaker) => (
+              <Link href={`/sneakers/${sneaker.id}`} key={sneaker.id}>
+                <div className="product-card">
+                  <div className="product-image overflow-hidden rounded-lg">
+                    <img src={sneaker.image} alt="" />
+                  </div>
+                  <div className="product-info py-0.5 px-1.5">
+                    <h1 className="product-name text-sm font-semibold">
+                      {sneaker.name}
+                    </h1>
+                    <div className="flex items-center">
+                      <h3 className="product-price font-semibold text-sm mr-1.5">
+                        ${sneaker.price}
+                      </h3>
+                      <h3 className="text-xs line-through text-slate-500">
+                        ${sneaker.oldPrice}
+                      </h3>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="product-card">
-              <div className="product-image overflow-hidden rounded-lg">
-                <img src="/sneakers/jordan-idk.jpeg" alt="" />
-              </div>
-              <div className="product-info py-0.5 px-1.5">
-                <h1 className="product-name text-sm font-semibold">Jordan Sky-400</h1>
-                <div className="flex items-center">
-                  <h3 className="product-price font-semibold text-sm mr-1.5">$149</h3>
-                  <h3 className="text-xs line-through text-slate-500">$180</h3>
-                </div>
-              </div>
-            </div>
-            <div className="product-card">
-              <div className="product-image overflow-hidden rounded-lg">
-                <img src="/sneakers/just-do-it.jpeg" alt="" />
-              </div>
-              <div className="product-info py-0.5 px-1.5">
-                <h1 className="product-name text-sm font-semibold">AirForce 1</h1>
-                <div className="flex items-center">
-                  <h3 className="product-price font-semibold text-sm mr-1.5">$64</h3>
-                  <h3 className="text-xs line-through text-slate-500">$99</h3>
-                </div>
-              </div>
-            </div>
-            <div className="product-card">
-              <div className="product-image overflow-hidden rounded-lg">
-                <img src="/sneakers/thick-boys.jpeg" alt="" />
-              </div>
-              <div className="product-info py-0.5 px-1.5">
-                <h1 className="product-name text-sm font-semibold">Thick Boys</h1>
-                <div className="flex items-center">
-                  <h3 className="product-price font-semibold text-sm mr-1.5">$99</h3>
-                  <h3 className="text-xs line-through text-slate-500">$139</h3>
-                </div>
-              </div>
-            </div>
+              </Link>
+            ))}
           </div>
         </section>
       </main>

@@ -15,7 +15,7 @@ function Nav() {
   return (
     <nav
       className="
-    bg-white px-5 pt-2.5 w-screen flex justify-between items-center
+    bg-white px-5 py-2.5 w-screen flex justify-between items-center
       fixed top-0 left-0 z-50"
     >
       <div className="h-min font-bold">Daily Kicks</div>
