@@ -6,6 +6,8 @@ import sneakers from "../../src/shoes";
 import Link from "next/link";
 import Category from "../../components/Category";
 import { useState } from "react";
+import Head from "next/head";
+import brands from "../../src/brands";
 
 function index() {
   const router = useRouter();
@@ -23,6 +25,14 @@ function index() {
 
   return (
     <div className="bg-slate-100">
+      <Head>
+        {brands.map((brand) => (
+          <link rel="preload" href={brand.image} as="image" key={brand.id} />
+        ))}
+        <link rel="preload" href="/logos/socks.jpeg" as="image" />
+        <link rel="preload" href="/logos/socks1.jpeg" as="image" />
+        <link rel="preload" href="/logos/socks3.jpeg" as="image" />
+      </Head>
       <Category isOpen={ isOpen } setIsOpen={ setIsOpen } />
       <header className="flex flex-col fixed top-0 left-0 right-0 z-50">
         <div className="h-[60px] w-full bg-white flex justify-between items-center py-1 px-3">
