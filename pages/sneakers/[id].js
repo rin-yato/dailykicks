@@ -14,7 +14,7 @@ function DetailProduct(props) {
   // if there is history, then go back to the previous page
   const handleBack = () => {
     // check if last history is daily-kicks
-    if (router.asPath.includes("daily-kicks")) {
+    if (router.asPath.includes("dailykicks")) {
       router.back();
     } else {
       router.push("/");

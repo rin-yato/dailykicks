@@ -1,16 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 import { ButtonBase, Drawer } from "@mui/material";
 import Head from "next/head";
-import React, { useRef } from "react";
-import { useState } from "react";
+import React, { useEffect } from "react";
 import brands from "../src/brands";
 
-function Category({ isOpen, setIsOpen }) {
+function Category({ isOpen, setIsOpen, opacity }) {
+  const sneakerBrands = brands.map((brand) => (
+    // <ButtonBase
+    //   key={brand.id}
+    //   className="w-full h-full shadow-md relative overflow-hidden
+    //    flex justify-center items-center p-5 bg-white rounded-md"
+    // >
+    //   <img src={brand.image} alt={brand.name} />
+    // </ButtonBase>
+    <ButtonBase key={brand.id} className="bg-white rounded-md py-4 font-bold shadow">{brand.name}</ButtonBase>
+  ));
+
   return (
-    <React.Fragment>
-      <Drawer anchor="right" open={isOpen} onClose={() => setIsOpen(false)}>
-        <div className="w-screen bg-slate-100 min-h-screen">
-          <header className="flex justify-between items-center py-1.5 px-3">
+    <div>
+      <Drawer anchor="right" open={isOpen} variant="persistent">
+        <div className=" bg-slate-100 min-h-screen">
+          <header className="flex justify-between items-center py-1.5 px-3 bg-white">
             <p className="uppercase font-bold mt-0.5 ml-3">category</p>
             <ButtonBase
               className=" rounded-full"
@@ -22,19 +32,7 @@ function Category({ isOpen, setIsOpen }) {
           <div className="flex flex-col mt-3">
             <h2 className="font-bold py-2 px-4">Sneakers</h2>
             <div className="brand-container grid grid-cols-2 auto-rows-fr px-4 gap-4">
-              {brands.map((brand) => (
-                <ButtonBase
-                  key={brand.id}
-                  className="w-full h-full shadow-md relative overflow-clip flex justify-center items-center p-5 bg-white rounded-md"
-                >
-                  <img
-                    src={brand.image}
-                    loading="eager"
-                    alt={brand.name}
-                    className="z-[20]"
-                  />
-                </ButtonBase>
-              ))}
+              {sneakerBrands}
             </div>
           </div>
           <div className="mt-4 py-3 px-4 pb-16">
@@ -68,7 +66,7 @@ function Category({ isOpen, setIsOpen }) {
           </div>
         </div>
       </Drawer>
-    </React.Fragment>
+    </div>
   );
 }
 
