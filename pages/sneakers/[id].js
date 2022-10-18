@@ -11,6 +11,15 @@ import Link from "next/link";
 function DetailProduct(props) {
   const router = useRouter();
 
+  // if there is history, then go back to the previous page
+  const handleBack = () => {
+    // check if last history is daily-kicks
+    if (router.asPath.includes("daily-kicks")) {
+      router.back();
+    } else {
+      router.push("/");
+    }
+  };
 
   const handleLike = (e) => {
     e.target.classList.toggle("text-slate-700");
@@ -34,13 +43,16 @@ function DetailProduct(props) {
         <div className="flex flex-col items-center justify-center pt-[50px] pb-[80px]">
           <div className="fixed h-[50px] top-0 left-0 right-0 z-50 bg-white flex justify-between items-center py-1 px-3">
             <ButtonBase
+              onClick={handleBack}
               className="min-w-min h-min rounded-full p-1.5 bg-white"
-              onClick={() => router.back()}
             >
               <i className="bx bxs-chevron-left bx-sm text-black"></i>
             </ButtonBase>
             <h4 className="uppercase font-semibold">Nike</h4>
-            <ButtonBase className="min-w-min h-min rounded-full p-1.5 bg-white" onClick={handleShare}>
+            <ButtonBase
+              className="min-w-min h-min rounded-full p-1.5 bg-white"
+              onClick={handleShare}
+            >
               <i className="bx bxs-share-alt bx-sm text-black"></i>
             </ButtonBase>
           </div>
@@ -102,25 +114,25 @@ function DetailProduct(props) {
               <div className="grid grid-cols-2 gap-3">
                 {sneakers.map((sneaker, index) => (
                   <Link href={`/sneakers/${sneaker.id}`} key={sneaker.id}>
-                  <div className="product-card">
-                    <div className="product-image overflow-hidden rounded-lg">
-                      <img src={sneaker.image} alt="" />
-                    </div>
-                    <div className="product-info py-0.5 px-1.5">
-                      <h1 className="product-name text-sm font-semibold">
-                        {sneaker.name}
-                      </h1>
-                      <div className="flex items-center">
-                        <h3 className="product-price font-semibold text-sm mr-1.5">
-                          ${sneaker.price}
-                        </h3>
-                        <h3 className="text-xs line-through text-slate-500">
-                          ${sneaker.oldPrice}
-                        </h3>
+                    <div className="product-card">
+                      <div className="product-image overflow-hidden rounded-lg">
+                        <img src={sneaker.image} alt="" />
+                      </div>
+                      <div className="product-info py-0.5 px-1.5">
+                        <h1 className="product-name text-sm font-semibold">
+                          {sneaker.name}
+                        </h1>
+                        <div className="flex items-center">
+                          <h3 className="product-price font-semibold text-sm mr-1.5">
+                            ${sneaker.price}
+                          </h3>
+                          <h3 className="text-xs line-through text-slate-500">
+                            ${sneaker.oldPrice}
+                          </h3>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -135,7 +147,6 @@ function DetailProduct(props) {
               <ButtonBase
                 className="w-full shadow rounded-full py-1.5 bg-sky-500 font-semibold text-white"
                 href="https://t.me/rinyato"
-                target="_blank"
               >
                 <i className="bx bxl-telegram bx-md -translate-x-1.5"></i>
                 Chat

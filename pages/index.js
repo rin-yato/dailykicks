@@ -11,7 +11,7 @@ export default function Home() {
     <Layout>
       <main className="min-h-screen w-screen overflow-x-hidden">
         <section
-          className="w-full h-[55vh] relative flex flex-col justify-end items-center"
+          className="w-full h-[60vh] relative flex flex-col justify-end items-center mb-4"
           id="hero"
         >
           <div className="relative mt-10 leading-[11rem] font-thin text-white text-[15rem] text-stroke">
