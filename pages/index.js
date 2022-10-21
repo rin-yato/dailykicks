@@ -26,9 +26,11 @@ export default function Home() {
             We provide the latest and greatest sneakers, with premium quality
             from the best brands.
           </p>
-          <ButtonBase className="bg-slate-800 py-1.5 px-4 rounded font-bold text-white mmb-[75px]">
-            SHOP NOW <i className="bx bx-right-arrow-alt bx-sm"></i>
-          </ButtonBase>
+          <Link href={'/sneakers'}>
+            <ButtonBase className="bg-slate-800 py-1.5 px-4 rounded font-bold text-white mmb-[75px]">
+              SHOP NOW <i className="bx bx-right-arrow-alt bx-sm"></i>
+            </ButtonBase>
+          </Link>
         </section>
         <section id="featured" className="flex flex-col justify-center py-14">
           <h1 className="text-center font-extrabold text-3xl">Featured</h1>

@@ -2,12 +2,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ButtonBase } from "@mui/material";
 import { useRouter } from "next/router";
-import sneakers from "../../src/shoes";
+import products from "../../src/shoes";
 import Link from "next/link";
 import Category from "../../components/Category";
 import { useEffect, useState } from "react";
-
 import brands from "../../src/brands";
+import ProductCard from "../../components/ProductCard";
+import { ProductionQuantityLimits } from "@mui/icons-material";
 
 
 function index() {
@@ -27,7 +28,7 @@ function index() {
   return (
     <div className="bg-slate-100">
       <Category isOpen={ isOpen } setIsOpen={ setIsOpen } />
-      <header className="flex flex-col fixed top-0 left-0 right-0 z-50">
+      <header className="flex flex-col fixed top-0 left-0 right-0 z-50 bg-white">
         <div className="h-[60px] w-full bg-white flex justify-between items-center py-1 px-3">
           <ButtonBase
             onClick={handleBack}
@@ -39,7 +40,7 @@ function index() {
             <input
               type="search"
               placeholder="air force 1"
-              className="bg-slate-100 px-5 py-0.5 rounded-full"
+              className="bg-slate-100 px-5 w-full py-0.5 rounded-full"
             />
           </div>
           <ButtonBase
@@ -49,8 +50,9 @@ function index() {
             <i className="bx bxs-category bx-sm text-black"></i>
           </ButtonBase>
         </div>
+        <div className="w-11/12 self-center h-[2px] bg-slate-200 rounded-[90%]"></div>
         <div className="sub-category bg-white overflow-x-scroll no-scroll">
-          <div className="flex justify-between items-center px-3 py-2 pb-3 gap-3 w-max">
+          <div className="flex justify-between items-center px-3 py-3 gap-3 w-max">
             <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5">
               All
             </div>
@@ -78,93 +80,17 @@ function index() {
       <main className="p-4 mt-[115px]">
         <div className="font-bold mb-4 mt-3">All Sneakers</div>
         <div className="product-container grid grid-cols-2 gap-4">
-          {sneakers.map((sneaker) => (
-            <Link href={`/sneakers/${sneaker.id}`} key={sneaker.id}>
-              <div className="product-card">
-                <div className="product-image overflow-hidden rounded-lg">
-                  <img src={sneaker.image} alt="" />
-                </div>
-                <div className="product-info py-0.5 px-1.5">
-                  <h1 className="product-name text-sm font-semibold">
-                    {sneaker.name}
-                  </h1>
-                  <div className="flex items-center">
-                    <h3 className="product-price font-semibold text-sm mr-1.5">
-                      ${sneaker.price}
-                    </h3>
-                    <h3 className="text-xs line-through text-slate-500">
-                      ${sneaker.oldPrice}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            </Link>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
-          {sneakers.map((sneaker) => (
-            <Link href={`/sneakers/${sneaker.id}`} key={sneaker.id}>
-              <div className="product-card">
-                <div className="product-image overflow-hidden rounded-lg">
-                  <img src={sneaker.image} alt="" />
-                </div>
-                <div className="product-info py-0.5 px-1.5">
-                  <h1 className="product-name text-sm font-semibold">
-                    {sneaker.name}
-                  </h1>
-                  <div className="flex items-center">
-                    <h3 className="product-price font-semibold text-sm mr-1.5">
-                      ${sneaker.price}
-                    </h3>
-                    <h3 className="text-xs line-through text-slate-500">
-                      ${sneaker.oldPrice}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            </Link>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
-          {sneakers.map((sneaker) => (
-            <Link href={`/sneakers/${sneaker.id}`} key={sneaker.id}>
-              <div className="product-card">
-                <div className="product-image overflow-hidden rounded-lg">
-                  <img src={sneaker.image} alt="" />
-                </div>
-                <div className="product-info py-0.5 px-1.5">
-                  <h1 className="product-name text-sm font-semibold">
-                    {sneaker.name}
-                  </h1>
-                  <div className="flex items-center">
-                    <h3 className="product-price font-semibold text-sm mr-1.5">
-                      ${sneaker.price}
-                    </h3>
-                    <h3 className="text-xs line-through text-slate-500">
-                      ${sneaker.oldPrice}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            </Link>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
-          {sneakers.map((sneaker) => (
-            <Link href={`/sneakers/${sneaker.id}`} key={sneaker.id}>
-              <div className="product-card">
-                <div className="product-image overflow-hidden rounded-lg">
-                  <img src={sneaker.image} alt="" />
-                </div>
-                <div className="product-info py-0.5 px-1.5">
-                  <h1 className="product-name text-sm font-semibold">
-                    {sneaker.name}
-                  </h1>
-                  <div className="flex items-center">
-                    <h3 className="product-price font-semibold text-sm mr-1.5">
-                      ${sneaker.price}
-                    </h3>
-                    <h3 className="text-xs line-through text-slate-500">
-                      ${sneaker.oldPrice}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            </Link>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </main>

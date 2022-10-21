@@ -111,7 +111,7 @@ function DetailProduct(props) {
             </div>
             <div className="related-products my-4">
               <p className="text-md mb-3 font-semibold">Related Products</p>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 w-full">
                 {sneakers.map((sneaker, index) => (
                   <Link href={`/sneakers/${sneaker.id}`} key={sneaker.id}>
                     <div className="product-card">
