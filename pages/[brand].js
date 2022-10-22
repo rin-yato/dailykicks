@@ -121,6 +121,6 @@ export async function getStaticPaths() {
     paths: brands.map((brand) => ({
       params: { brand: brand.name },
     })),
-    fallback: true,
+    fallback: false,
   };
 }

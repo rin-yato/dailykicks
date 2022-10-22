@@ -6,7 +6,7 @@ import React, { useEffect } from "react";
 import brands from "../src/brands";
 import Link from "next/link";
 
-function Category({ isOpen, setIsOpen, opacity }) {
+function Category({ isOpen, setIsOpen }) {
   const sneakerBrands = brands.map((brand) => (
     <Link key={ brand.id } href={`/${brand.name}`}>
       <ButtonBase onClick={() => setIsOpen(false)}
