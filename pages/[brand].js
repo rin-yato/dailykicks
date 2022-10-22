@@ -2,16 +2,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ButtonBase } from "@mui/material";
 import { useRouter } from "next/router";
-import products from "../../src/shoes";
+import products from "../src/shoes";
 import Link from "next/link";
-import Category from "../../components/Category";
+import Category from "../components/Category";
 import { useEffect, useState } from "react";
-import brands from "../../src/brands";
-import ProductCard from "../../components/ProductCard";
+import brands from "../src/brands";
+import ProductCard from "../components/ProductCard";
 import { ProductionQuantityLimits } from "@mui/icons-material";
 
-
-function index({ brand }) {
+function Brand({ brand }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,7 +26,7 @@ function index({ brand }) {
 
   return (
     <div className="bg-slate-100">
-      <Category isOpen={ isOpen } setIsOpen={ setIsOpen } />
+      <Category isOpen={isOpen} setIsOpen={setIsOpen} />
       <header className="flex flex-col fixed top-0 left-0 right-0 z-50 bg-white">
         <div className="h-[60px] w-full bg-white flex justify-between items-center py-1 px-3">
           <div className="flex items-center gap-2">
@@ -37,7 +36,7 @@ function index({ brand }) {
             >
               <i className="bx bxs-chevron-left bx-sm text-black"></i>
             </ButtonBase>
-            <div className="font-bold">All Sneakers</div>
+            <div className="font-bold">{brand.name}</div>
           </div>
           <div className="flex items-center gap-2">
             <ButtonBase className="min-w-min h-min rounded-full p-1.5 bg-white">
@@ -105,6 +104,23 @@ function index({ brand }) {
   );
 }
 
-export default index;
+export default Brand;
 
+export async function getStaticProps(context) {
+  const brandName = context.params.brand;
+  const brand = brands.find((brand) => brand.name === brandName);
+  return {
+    props: {
+      brand,
+    },
+  };
+}
 
+export async function getStaticPaths() {
+  return {
+    paths: brands.map((brand) => ({
+      params: { brand: brand.name },
+    })),
+    fallback: true,
+  };
+}

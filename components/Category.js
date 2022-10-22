@@ -4,16 +4,18 @@ import Head from "next/head";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import brands from "../src/brands";
+import Link from "next/link";
 
 function Category({ isOpen, setIsOpen, opacity }) {
   const sneakerBrands = brands.map((brand) => (
-    <ButtonBase
-      key={brand.id}
-      className="w-full h-full shadow-md relative overflow-hidden
-       flex justify-center items-center p-5 py-2 box-border bg-white rounded-md"
-    >
-          <Image src={ brand.image } alt={ brand.name } width="100%" height="100%" objectFit="contain" />
-    </ButtonBase>
+    <Link key={ brand.id } href={`/${brand.name}`}>
+      <ButtonBase onClick={() => setIsOpen(false)}
+        className="w-full h-full shadow-md relative overflow-hidden
+         flex justify-center items-center p-5 py-2 box-border bg-white rounded-md"
+      >
+            <Image src={ brand.image } alt={ brand.name } width="100%" height="100%" objectFit="contain" />
+      </ButtonBase>
+    </Link>
     // <ButtonBase key={brand.id} className="bg-white rounded-md py-4 font-bold shadow">{brand.name}</ButtonBase>
   ));
 
