@@ -12,13 +12,20 @@ function SearchNav({ isOpen, setIsOpen, handleBack, brand }) {
     const scrollPosition = window.scrollY;
 
     if (window.scrollY < oldScroll) {
-      if (window.scrollY < oldScroll - 80) {
+      if (
+        window.scrollY < oldScroll - 50 &&
+        subCategory.style.transform !== "translateY(0%)"
+      ) {
         if (subCategory.style.transform !== "translateY(0%)") {
           subCategory.style.transform = "translateY(0%)";
+          setOldScroll(scrollPosition);
         }
       }
     } else {
-      if (subCategory.style.transform !== "translateY(-100%)") {
+      if (
+        window.scrollY > oldScroll + 50 &&
+        subCategory.style.transform !== "translateY(-100%)"
+      ) {
         subCategory.style.transform = "translateY(-100%)";
       }
       setOldScroll(scrollPosition);
@@ -60,8 +67,8 @@ function SearchNav({ isOpen, setIsOpen, handleBack, brand }) {
         className="sub-category -z-[1] bg-white absolute top-full flex justify-between items-center duration-300"
         ref={subCategoryContainer}
       >
-        <div className="flex relative justify-between items-center gap-3 w-full ">
-          <div className="flex justify-between items-center px-3 py-3 gap-3 overflow-x-scroll no-scroll">
+        <div className="flex relative justify-between items-center gap-3 w-screen overflow-x-scroll no-scroll">
+          <div className="flex justify-between items-center px-3 py-3 gap-3">
             <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5">
               All
             </div>
