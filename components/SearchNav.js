@@ -3,40 +3,27 @@ import { ButtonBase } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 
 function SearchNav({ isOpen, setIsOpen, handleBack, brand }) {
-  const [oldScroll, setOldScroll] = useState(0);
   const subCategoryContainer = useRef(null);
-  // if scroll up then hide sub-category
-  // if scroll down then show sub-category
-  const handleScroll = () => {
-    const subCategory = subCategoryContainer.current;
-    const scrollPosition = window.scrollY;
 
-    if (window.scrollY < oldScroll) {
-      if (
-        window.scrollY < oldScroll - 50 &&
-        subCategory.style.transform !== "translateY(0%)"
-      ) {
-        if (subCategory.style.transform !== "translateY(0%)") {
-          subCategory.style.transform = "translateY(0%)";
-          setOldScroll(scrollPosition);
-        }
-      }
+  let oldScrollY = 0;
+
+  const [direction, setDirection] = useState("up");
+
+  const controlDirection = () => {
+    if (window.scrollY > oldScrollY) {
+      setDirection("down");
     } else {
-      if (
-        window.scrollY > oldScroll + 50 &&
-        subCategory.style.transform !== "translateY(-100%)"
-      ) {
-        subCategory.style.transform = "translateY(-100%)";
-      }
-      setOldScroll(scrollPosition);
+      setDirection("up");
     }
-
-    // console.log("scroll position", scrollPosition, "old scroll", oldScroll);
+    oldScrollY = window.scrollY;
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-  }, [oldScroll]);
+    window.addEventListener("scroll", controlDirection);
+    return () => {
+      window.removeEventListener("scroll", controlDirection);
+    };
+  }, []);
 
   return (
     <header className="flex flex-col fixed top-0 left-0 right-0 z-50 bg-white">
@@ -64,7 +51,9 @@ function SearchNav({ isOpen, setIsOpen, handleBack, brand }) {
       </div>
       <div className="w-11/12 self-center h-[2px] bg-slate-200 rounded-[90%]"></div>
       <div
-        className="sub-category -z-[1] bg-white absolute top-full flex justify-between items-center duration-300"
+        className={`sub-category -z-[1] bg-white absolute delay-500 top-full flex justify-between items-center duration-300 ${
+          direction === "down" ? "-translate-y-full" : ""
+        }`}
         ref={subCategoryContainer}
       >
         <div className="flex relative justify-between items-center gap-3 w-screen overflow-x-scroll no-scroll">
