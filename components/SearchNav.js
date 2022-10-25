@@ -51,7 +51,7 @@ function SearchNav({ isOpen, setIsOpen, handleBack, brand }) {
       </div>
       <div className="w-11/12 self-center h-[2px] bg-slate-200 rounded-[90%]"></div>
       <div
-        className={`sub-category -z-[1] bg-white absolute delay-500 top-full flex justify-between items-center duration-300 ${
+        className={`sub-category -z-[1] bg-white absolute delay-100 top-full flex justify-between items-center duration-500 ${
           direction === "down" ? "-translate-y-full" : ""
         }`}
         ref={subCategoryContainer}

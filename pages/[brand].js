@@ -11,7 +11,7 @@ import ProductCard from "../components/ProductCard";
 import { ProductionQuantityLimits } from "@mui/icons-material";
 import SearchNav from "../components/SearchNav";
 
-function Brand({ brand }) {
+function Brand({ brand, products }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [oldScroll, setOldScroll] = useState(0);
@@ -27,11 +27,11 @@ function Brand({ brand }) {
   };
 
   return (
-    <div className="bg-slate-100">
+    <div className="bg-slate-100 h-screen">
       <Category isOpen={isOpen} setIsOpen={setIsOpen} />
       <SearchNav isOpen={ isOpen } setIsOpen={ setIsOpen } handleBack={ handleBack } brand={ brand } />
       <main className="p-4 pt-[115px]">
-        <div className="font-bold mb-4 mt-3">All Sneakers</div>
+        <div className="font-bold mb-4 mt-3">All</div>
         <div className="product-container grid grid-cols-2 gap-4">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
@@ -56,9 +56,11 @@ export default Brand;
 export async function getStaticProps(context) {
   const brandName = context.params.brand;
   const brand = brands.find((brand) => brand.name === brandName);
+  const filteredProducts = products.filter((product) => product.brand.toLowerCase() === brandName.toLowerCase());
   return {
     props: {
       brand,
+      products: filteredProducts,
     },
   };
 }
