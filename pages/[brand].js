@@ -10,14 +10,17 @@ import brands from "../src/brands";
 import ProductCard from "../components/ProductCard";
 import { ProductionQuantityLimits } from "@mui/icons-material";
 import SearchNav from "../components/SearchNav";
+import { sanityClient, urlFor } from "../sanity";
 
-function Brand({ brand, products }) {
+function Brand({ brand, products, categories }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [oldScroll, setOldScroll] = useState(0);
+  const [currentCategory, setCurrentCategory] = useState("All");
+  const filteredProducts = useRef(products);
 
-  // if there is history, then go back to the previous page
   const handleBack = () => {
+    // if there is history, then go back to the previous page
     // check if last history is daily-kicks
     if (router.asPath.includes("dailykicks")) {
       router.back();
@@ -26,24 +29,33 @@ function Brand({ brand, products }) {
     }
   };
 
+  const handleFilter = (category) => {
+    setCurrentCategory(category);
+    if (category === "All") {
+      filteredProducts.current = products;
+    } else {
+      filteredProducts.current = products.filter(
+        (product) => product.category.name === category
+      );
+    }
+  };
+
   return (
     <div className="bg-slate-100 h-screen">
       <Category isOpen={isOpen} setIsOpen={setIsOpen} />
-      <SearchNav isOpen={ isOpen } setIsOpen={ setIsOpen } handleBack={ handleBack } brand={ brand } />
+      <SearchNav
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        handleBack={handleBack}
+        brand={brand}
+        categories={categories}
+        handleFilter={handleFilter}
+      />
       <main className="p-4 pt-[115px]">
-        <div className="font-bold mb-4 mt-3">All</div>
+        <div className="font-bold mb-4 mt-3">{currentCategory}</div>
         <div className="product-container grid grid-cols-2 gap-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {filteredProducts.current.map((product) => (
+            <ProductCard key={product.name} product={product} />
           ))}
         </div>
       </main>
@@ -55,12 +67,29 @@ export default Brand;
 
 export async function getStaticProps(context) {
   const brandName = context.params.brand;
-  const brand = brands.find((brand) => brand.name === brandName);
-  const filteredProducts = products.filter((product) => product.brand.toLowerCase() === brandName.toLowerCase());
+
+  const brandQuery = `*[_type == "brand"]`;
+  const productQuery = `*[_type == "product"]{id, name, brand->, category->, price, image}`;
+  const categoryQuery = `*[_type == "category" && brand->.name == "${brandName}"]`;
+
+  const brands = await sanityClient.fetch(brandQuery);
+  const products = await sanityClient.fetch(productQuery);
+  const categories = await sanityClient.fetch(categoryQuery);
+
+  const brand = brands.find(
+    (brand) => brand.name.toLowerCase() === brandName.toLowerCase()
+  );
+  const brandProducts = products.filter(
+    (product) => product.brand.name.toLowerCase() === brandName.toLowerCase()
+  );
+
+  console.log(brand, products);
+
   return {
     props: {
       brand,
-      products: filteredProducts,
+      products: brandProducts,
+      categories,
     },
   };
 }

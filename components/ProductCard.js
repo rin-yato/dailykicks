@@ -1,13 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Link from "next/link";
+import { urlFor } from "../sanity";
 
 function ProductCard({ product }) {
   return (
-    <Link href={`/sneakers/${product.id}`} key={product.id}>
+    <Link href={`/sneakers/${product.id}`}>
       <div className="product-card">
         <div className="product-image overflow-hidden rounded-lg">
-          <img src={product.image} alt="" />
+          <img src={urlFor(product.image).url()} alt="" />
         </div>
         <div className="product-info py-0.5 px-1.5">
           <h1 className="product-name text-sm font-semibold">{product.name}</h1>

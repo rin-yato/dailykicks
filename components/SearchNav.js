@@ -2,7 +2,7 @@ import React from "react";
 import { ButtonBase } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 
-function SearchNav({ isOpen, setIsOpen, handleBack, brand }) {
+function SearchNav({ setIsOpen, handleBack, brand, categories, handleFilter }) {
   const subCategoryContainer = useRef(null);
 
   let oldScrollY = 0;
@@ -58,27 +58,14 @@ function SearchNav({ isOpen, setIsOpen, handleBack, brand }) {
       >
         <div className="flex relative justify-between items-center gap-3 w-screen overflow-x-scroll no-scroll">
           <div className="flex justify-between items-center px-3 py-3 gap-3">
-            <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5">
+            <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5" onClick={() => handleFilter("All")}>
               All
             </div>
-            <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5">
-              Jordan
-            </div>
-            <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5">
-              AirForce
-            </div>
-            <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5">
-              Converse
-            </div>
-            <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5">
-              Sports
-            </div>
-            <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5">
-              Classic
-            </div>
-            <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5">
-              Yezzy
-            </div>
+            {categories.map((category) => (
+              <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5" key={category._id} onClick={() => handleFilter(category.name)}>
+                {category.name}
+              </div>
+            ))}
           </div>
         </div>
       </div>
