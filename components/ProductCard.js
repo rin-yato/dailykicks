@@ -5,7 +5,7 @@ import { urlFor } from "../sanity";
 
 function ProductCard({ product }) {
   return (
-    <Link href={`/sneakers/${product.id}`}>
+    <Link href={`/sneakers/${product._id}`}>
       <div className="product-card">
         <div className="product-image overflow-hidden rounded-lg">
           <img src={urlFor(product.image).url()} alt="" />

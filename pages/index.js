@@ -3,10 +3,11 @@
 import { ButtonBase } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import ProductCard from "../components/ProductCard";
 import Layout from "../layouts/Layout";
-import sneakers from "../src/shoes";
+import { sanityClient, urlFor } from "../sanity";
 
-export default function Home() {
+export default function Home({ sneakers }) {
   return (
     <Layout>
       <main className="min-h-screen w-screen overflow-x-hidden">
@@ -37,26 +38,7 @@ export default function Home() {
           <h3 className="text-[10px] font-semibold text-center">PRODUCTS</h3>
           <div className="featured-container grid grid-cols-2 gap-3 px-3 mt-5">
             {sneakers.map((sneaker) => (
-              <Link href={`/sneakers/${sneaker.id}`} key={sneaker.id}>
-                <div className="product-card">
-                  <div className="product-image overflow-hidden rounded-lg">
-                    <img src={sneaker.image} alt="" />
-                  </div>
-                  <div className="product-info py-0.5 px-1.5">
-                    <h1 className="product-name text-sm font-semibold">
-                      {sneaker.name}
-                    </h1>
-                    <div className="flex items-center">
-                      <h3 className="product-price font-semibold text-sm mr-1.5">
-                        ${sneaker.price}
-                      </h3>
-                      <h3 className="text-xs line-through text-slate-500">
-                        ${sneaker.oldPrice}
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              <ProductCard key={ sneaker._id } product={ sneaker } />
             ))}
           </div>
         </section>
@@ -67,31 +49,23 @@ export default function Home() {
           <h1 className="text-center font-extrabold text-3xl">Best Sellers</h1>
           <h3 className="text-[10px] font-semibold text-center">PRODUCTS</h3>
           <div className="featured-container grid grid-cols-2 gap-3 px-3 mt-5">
-            {sneakers.map((sneaker) => (
-              <Link href={`/sneakers/${sneaker.id}`} key={sneaker.id}>
-                <div className="product-card">
-                  <div className="product-image overflow-hidden rounded-lg">
-                    <img src={sneaker.image} alt="" />
-                  </div>
-                  <div className="product-info py-0.5 px-1.5">
-                    <h1 className="product-name text-sm font-semibold">
-                      {sneaker.name}
-                    </h1>
-                    <div className="flex items-center">
-                      <h3 className="product-price font-semibold text-sm mr-1.5">
-                        ${sneaker.price}
-                      </h3>
-                      <h3 className="text-xs line-through text-slate-500">
-                        ${sneaker.oldPrice}
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+          {sneakers.map((sneaker) => (
+              <ProductCard key={ sneaker._id } product={ sneaker } />
             ))}
           </div>
         </section>
       </main>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const sneakersQuery = `*[_type == "product"]{name, price, oldPrice, image, _id}`;
+  const sneakers = await sanityClient.fetch(sneakersQuery);
+
+  return {
+    props: {
+      sneakers,
+    },
+  };
 }

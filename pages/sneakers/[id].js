@@ -4,9 +4,9 @@
 import { Badge, ButtonBase, Rating } from "@mui/material";
 import React from "react";
 import NoNav from "../../layouts/NoNav";
-import sneakers from "../../src/shoes";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { urlFor, sanityClient } from "../../sanity";
 
 function DetailProduct(props) {
   const router = useRouter();
@@ -57,7 +57,7 @@ function DetailProduct(props) {
             </ButtonBase>
           </div>
           <div className="bg-slate-200 relative">
-            <img src={props.product.image} className="" />
+            <img src={urlFor(props.product.image).url()} className="" />
             <ButtonBase className=" absolute bottom-0 left-0 m-4 min-w-min rounded-full p-1 bg-white">
               <i
                 className="bx bxs-heart bx-sm text-slate-700"
@@ -112,11 +112,11 @@ function DetailProduct(props) {
             <div className="related-products my-4">
               <p className="text-md mb-3 font-semibold">Related Products</p>
               <div className="grid grid-cols-2 gap-3 w-full">
-                {sneakers.map((sneaker, index) => (
-                  <Link href={`/sneakers/${sneaker.id}`} key={sneaker.id}>
+                {props.sneakers.map((sneaker) => (
+                  <Link href={`/sneakers/${sneaker._id}`} key={sneaker._id}>
                     <div className="product-card">
                       <div className="product-image overflow-hidden rounded-lg">
-                        <img src={sneaker.image} alt="" />
+                        <img src={urlFor(sneaker.image).url()} alt="" />
                       </div>
                       <div className="product-info py-0.5 px-1.5">
                         <h1 className="product-name text-sm font-semibold">
@@ -165,18 +165,39 @@ export async function getStaticProps(Context) {
   const { params } = Context;
   const id = params.id;
 
-  const sneaker = sneakers.find((sneaker) => sneaker.id === parseInt(id));
+  const sneakerQuery = `*[_type == "product"]{
+    _id,
+    name,
+    price,
+    oldPrice,
+    image,
+    description,
+    brand->,
+    category->,
+  }`;
+
+  const sneakers = await sanityClient.fetch(sneakerQuery);
+
+  const product = sneakers.find((sneaker) => sneaker._id === id);
+
+  console.log(id);
 
   return {
     props: {
-      product: sneaker,
+      product,
+      sneakers,
     },
   };
 }
 
 export async function getStaticPaths() {
+  const sneakersQuery = `*[_type == "product"]{
+    _id,
+  }`;
+
+  const sneakers = await sanityClient.fetch(sneakersQuery);
   const paths = sneakers.map((sneaker) => ({
-    params: { id: sneaker.id.toString() },
+    params: { id: sneaker._id.toString() },
   }));
 
   return {
