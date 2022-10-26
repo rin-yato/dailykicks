@@ -2,13 +2,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ButtonBase } from "@mui/material";
 import { useRouter } from "next/router";
-import products from "../src/shoes";
 import Link from "next/link";
 import Category from "../components/Category";
 import { useEffect, useRef, useState } from "react";
-import brands from "../src/brands";
 import ProductCard from "../components/ProductCard";
-import { ProductionQuantityLimits } from "@mui/icons-material";
 import SearchNav from "../components/SearchNav";
 import { sanityClient, urlFor } from "../sanity";
 
@@ -55,7 +52,7 @@ function Brand({ brand, products, categories }) {
         <div className="font-bold mb-4 mt-3">{currentCategory}</div>
         <div className="product-container grid grid-cols-2 gap-4">
           {filteredProducts.current.map((product) => (
-            <ProductCard key={product.name} product={product} />
+            <ProductCard key={product._id} product={product} />
           ))}
         </div>
       </main>
@@ -95,6 +92,8 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
+  const brandQuery = `*[_type == "brand"]`;
+  const brands = await sanityClient.fetch(brandQuery);
   return {
     paths: brands.map((brand) => ({
       params: { brand: brand.name },
