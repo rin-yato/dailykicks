@@ -14,7 +14,7 @@ function Brand({ brand, products, categories }) {
   const [isOpen, setIsOpen] = useState(false);
   const [oldScroll, setOldScroll] = useState(0);
   const [currentCategory, setCurrentCategory] = useState("All");
-  const filteredProducts = useRef(products);
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
   const handleBack = () => {
     // if there is history, then go back to the previous page
@@ -29,16 +29,17 @@ function Brand({ brand, products, categories }) {
   const handleFilter = (category) => {
     setCurrentCategory(category);
     if (category === "All") {
-      filteredProducts.current = products;
+      setFilteredProducts(products);
     } else {
-      filteredProducts.current = products.filter(
+      let newFilteredProducts = products.filter(
         (product) => product.category.name === category
       );
+      setFilteredProducts(newFilteredProducts);
     }
   };
 
   useEffect(() => {
-    filteredProducts.current = products;
+    setFilteredProducts(products);
   }, [products]);
 
 
@@ -56,7 +57,7 @@ function Brand({ brand, products, categories }) {
       <main className="p-4 pt-[115px]">
         <div className="font-bold mb-4 mt-3">{currentCategory}</div>
         <div className="product-container grid grid-cols-2 gap-4">
-          { filteredProducts.current.map((product) => (
+          { filteredProducts.map((product) => (
             product ? <ProductCard key={product._id} product={product} /> : ''
           ))}
         </div>
