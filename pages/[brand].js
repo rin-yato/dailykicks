@@ -37,6 +37,10 @@ function Brand({ brand, products, categories }) {
     }
   };
 
+  useEffect(() => {
+    handleFilter("All");
+  }, []);
+
   return (
     <div className="bg-slate-100 h-screen">
       <Category isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -51,8 +55,8 @@ function Brand({ brand, products, categories }) {
       <main className="p-4 pt-[115px]">
         <div className="font-bold mb-4 mt-3">{currentCategory}</div>
         <div className="product-container grid grid-cols-2 gap-4">
-          {filteredProducts.current.map((product) => (
-            <ProductCard key={product._id} product={product} />
+          { filteredProducts.current.map((product) => (
+            product ? <ProductCard key={product._id} product={product} /> : ''
           ))}
         </div>
       </main>
@@ -65,27 +69,18 @@ export default Brand;
 export async function getStaticProps(context) {
   const brandName = context.params.brand;
 
-  const brandQuery = `*[_type == "brand"]`;
-  const productQuery = `*[_type == "product"]{_id, name, brand->, category->, price, image}`;
+  const brandQuery = `*[_type == "brand" && name == "${brandName}"][0]`;
+  const productQuery = `*[_type == "product" && brand->.name == "${brandName}"]{_id, name, brand->, category->, price, image}`;
   const categoryQuery = `*[_type == "category" && brand->.name == "${brandName}"]`;
 
-  const brands = await sanityClient.fetch(brandQuery);
+  const brand = await sanityClient.fetch(brandQuery);
   const products = await sanityClient.fetch(productQuery);
   const categories = await sanityClient.fetch(categoryQuery);
-
-  const brand = brands.find(
-    (brand) => brand.name.toLowerCase() === brandName.toLowerCase()
-  );
-  const brandProducts = products.filter(
-    (product) => product.brand.name.toLowerCase() === brandName.toLowerCase()
-  );
-
-  console.log(brand, products);
 
   return {
     props: {
       brand,
-      products: brandProducts,
+      products,
       categories,
     },
   };
