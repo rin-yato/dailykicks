@@ -38,8 +38,9 @@ function Brand({ brand, products, categories }) {
   };
 
   useEffect(() => {
-    handleFilter("All");
-  }, []);
+    filteredProducts.current = products;
+  }, [products]);
+
 
   return (
     <div className="bg-slate-100 h-screen">
