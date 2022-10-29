@@ -11,7 +11,11 @@ function ProductCard({ product }) {
           <img src={urlFor(product.image).url()} alt="" />
         </div>
         <div className="product-info py-0.5 px-1.5">
-          <h1 className="product-name text-sm font-semibold">{product.name}</h1>
+          <h1 className="product-name text-sm font-semibold">
+            {product.name.length > 14
+              ? `${product.name.substr(0, 12)}...`
+              : product.name}
+          </h1>
           <div className="flex items-center">
             <h3 className="product-price font-semibold text-sm mr-1.5">
               ${product.price}
