@@ -4,17 +4,24 @@ import { ButtonBase } from "@mui/material";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Category from "../../components/Category";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "../../components/ProductCard";
 import SearchNav from "../../components/SearchNav";
 import { sanityClient, urlFor } from "../../sanity";
+import FilterDrawer from "../../components/FilterDrawer";
 
 function index({ brands, products, categories }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [oldScroll, setOldScroll] = useState(0);
   const [currentCategory, setCurrentCategory] = useState("All");
-  const filteredProducts = useRef(products);
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [filterDrawer, setFilterDrawer] = useState(false);
+  const [priceRange, setPriceRange] = useState([0, 200]);
+  const [isPopular, setIsPopular] = useState(false);
+  const [isLowToHigh, setIsLowToHigh] = useState(false);
+  const [isHighToLow, setIsHighToLow] = useState(false);
+  const [isNewest, setIsNewest] = useState(false);
 
   const handleBack = () => {
     // if there is history, then go back to the previous page
@@ -29,20 +36,71 @@ function index({ brands, products, categories }) {
   const handleFilter = (category) => {
     setCurrentCategory(category);
     if (category === "All") {
-      filteredProducts.current = products;
+      setFilteredProducts(products);
     } else {
-      filteredProducts.current = products.filter(
-        (product) => {
-          if (product.category) {
-            return product.category.name === category
-          }
-        }
+      let newFilteredProducts = products.filter(
+        (product) => product.category.name === category
       );
+      setFilteredProducts(newFilteredProducts);
     }
   };
 
+  const filterPriceRange = ([min, max]) => {
+    let newFilteredProducts = products.filter(
+      (product) => product.price >= min && product.price <= max
+    );
+    setFilteredProducts(newFilteredProducts);
+    console.log("price range", filteredProducts, products);
+    console.log("price range", priceRange);
+  };
+
+  const filterPriceLowToHigh = () => {
+    let newFilteredProducts = products.sort((a, b) => a.price - b.price);
+    setFilteredProducts(newFilteredProducts);
+    console.log("low", filteredProducts);
+  };
+
+  const filterPriceHighToLow = () => {
+    let newFilteredProducts = products.sort((a, b) => b.price - a.price);
+    setFilteredProducts(newFilteredProducts);
+    console.log("hight", filteredProducts);
+  };
+
+  const filterNewest = () => {
+    let newFilteredProducts = products.sort(
+      (a, b) => new Date(b._createdAt) - new Date(a._createdAt)
+    );
+    setFilteredProducts(newFilteredProducts);
+    console.log("new", filteredProducts);
+  };
+
+  const filterPopular = () => {
+    setFilteredProducts(filteredProducts);
+    console.log("popular", filteredProducts);
+  };
+
+  const handleAllFilter = () => {
+    if (isPopular) filterPopular();
+
+    if (isLowToHigh) filterPriceLowToHigh();
+
+    if (isHighToLow) filterPriceHighToLow();
+
+    if (isNewest) filterNewest();
+
+    filterPriceRange(priceRange);
+  };
+
+  useEffect(() => {
+    setFilteredProducts(filteredProducts);
+  }, [filteredProducts]);
+
+  useEffect(() => {
+    handleAllFilter();
+  }, [priceRange]);
+
   return (
-    <div className="bg-slate-100 h-screen">
+    <div className="bg-slate-100">
       <Category isOpen={isOpen} setIsOpen={setIsOpen} />
       <SearchNav
         isOpen={isOpen}
@@ -51,10 +109,29 @@ function index({ brands, products, categories }) {
         categories={categories}
         handleFilter={handleFilter}
       />
+      <FilterDrawer
+        setFilterDrawer={setFilterDrawer}
+        filterDrawer={filterDrawer}
+        filterPriceRange={filterPriceRange}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+        isPopular={isPopular}
+        setIsPopular={setIsPopular}
+        isLowToHigh={isLowToHigh}
+        setIsLowToHigh={setIsLowToHigh}
+        isHighToLow={isHighToLow}
+        setIsHighToLow={setIsHighToLow}
+        isNewest={isNewest}
+        setIsNewest={setIsNewest}
+        filterNewest={filterNewest}
+        filterPopular={filterPopular}
+        filterPriceLowToHigh={filterPriceLowToHigh}
+        filterPriceHighToLow={filterPriceHighToLow}
+      />
       <main className="p-4 pt-[115px]">
         <div className="font-bold mb-4 mt-3">{currentCategory}</div>
         <div className="product-container grid grid-cols-2 gap-4">
-          {filteredProducts.current.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.name} product={product} />
           ))}
         </div>
@@ -66,24 +143,13 @@ function index({ brands, products, categories }) {
 export default index;
 
 export async function getStaticProps(context) {
-  // const brandName = context.params.brand;
-
   const brandQuery = `*[_type == "brand"]`;
-  const productQuery = `*[_type == "product"]{_id, name, brand->, category->, price, image}`;
+  const productQuery = `*[_type == "product"]{_id, name, brand->, category->, price, oldPrice, image}`;
   const categoryQuery = `*[_type == "category"]`;
 
   const brands = await sanityClient.fetch(brandQuery);
   const products = await sanityClient.fetch(productQuery);
   const categories = await sanityClient.fetch(categoryQuery);
-
-  // const brand = brands.find(
-  //   (brand) => brand.name.toLowerCase() === brandName.toLowerCase()
-  // );
-  // const brandProducts = products.filter(
-  //   (product) => product.brand.name.toLowerCase() === brandName.toLowerCase()
-  // );
-
-  console.log(products);
 
   return {
     props: {
@@ -94,14 +160,3 @@ export async function getStaticProps(context) {
   };
 }
 
-// export async function getStaticPaths() {
-//   const brands = await sanityClient.fetch(
-//     `*[_type == "brand"]{name}`
-//   );
-//   return {
-//     paths: brands.map((brand) => ({
-//       params: { brand: brand.name },
-//     })),
-//     fallback: false,
-//   };
-// }

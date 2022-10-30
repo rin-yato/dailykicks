@@ -105,7 +105,7 @@ function FilterDrawer({
         },
       }}
     >
-      <div className="container h-[45vh] bg-white flex flex-col p-5 items-start">
+      <div className="container bg-white flex flex-col px-5 py-7 items-start">
         <h2 className="font-bold text-lg">Filter</h2>
         <div className="flex justify-between gap-5 w-full pb-4 pt-3">
           <ButtonBase

@@ -16,8 +16,8 @@ function Brand({ brand, products, categories }) {
   const [oldScroll, setOldScroll] = useState(0);
   const [currentCategory, setCurrentCategory] = useState("All");
   const [filteredProducts, setFilteredProducts] = useState(products);
-  const [filterDrawer, setFilterDrawer] = useState(true);
-  const [priceRange, setPriceRange] = useState([0, 125]);
+  const [filterDrawer, setFilterDrawer] = useState(false);
+  const [priceRange, setPriceRange] = useState([0, 200]);
   const [isPopular, setIsPopular] = useState(false);
   const [isLowToHigh, setIsLowToHigh] = useState(false);
   const [isHighToLow, setIsHighToLow] = useState(false);
