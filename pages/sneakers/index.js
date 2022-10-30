@@ -37,11 +37,18 @@ function index({ brands, products, categories }) {
     setCurrentCategory(category);
     if (category === "All") {
       setFilteredProducts(products);
+      handleAllFilter();
     } else {
       let newFilteredProducts = products.filter(
-        (product) => product.category.name === category
+        (product) => {
+          if (product.category) {
+            return product.category.name === category
+          };
+        }
       );
       setFilteredProducts(newFilteredProducts);
+      handleAllFilter();
+      console.log(filteredProducts, newFilteredProducts)
     }
   };
 
@@ -50,20 +57,16 @@ function index({ brands, products, categories }) {
       (product) => product.price >= min && product.price <= max
     );
     setFilteredProducts(newFilteredProducts);
-    console.log("price range", filteredProducts, products);
-    console.log("price range", priceRange);
   };
 
   const filterPriceLowToHigh = () => {
     let newFilteredProducts = products.sort((a, b) => a.price - b.price);
     setFilteredProducts(newFilteredProducts);
-    console.log("low", filteredProducts);
   };
 
   const filterPriceHighToLow = () => {
     let newFilteredProducts = products.sort((a, b) => b.price - a.price);
     setFilteredProducts(newFilteredProducts);
-    console.log("hight", filteredProducts);
   };
 
   const filterNewest = () => {
@@ -71,12 +74,10 @@ function index({ brands, products, categories }) {
       (a, b) => new Date(b._createdAt) - new Date(a._createdAt)
     );
     setFilteredProducts(newFilteredProducts);
-    console.log("new", filteredProducts);
   };
 
   const filterPopular = () => {
     setFilteredProducts(filteredProducts);
-    console.log("popular", filteredProducts);
   };
 
   const handleAllFilter = () => {
@@ -92,8 +93,8 @@ function index({ brands, products, categories }) {
   };
 
   useEffect(() => {
-    setFilteredProducts(filteredProducts);
-  }, [filteredProducts]);
+    setFilteredProducts(products);
+  }, [products]);
 
   useEffect(() => {
     handleAllFilter();
@@ -129,7 +130,15 @@ function index({ brands, products, categories }) {
         filterPriceHighToLow={filterPriceHighToLow}
       />
       <main className="p-4 pt-[115px]">
-        <div className="font-bold mb-4 mt-3">{currentCategory}</div>
+        <div className="flex justify-between items-center w-full pt-5 pb-2">
+          <div className="font-bold">{currentCategory}</div>
+          <ButtonBase
+            className="p-1 rounded-full"
+            onClick={() => setFilterDrawer(true)}
+          >
+            <i className="bx bx-slider bx-sm"></i>
+          </ButtonBase>
+        </div>
         <div className="product-container grid grid-cols-2 gap-4">
           {filteredProducts.map((product) => (
             <ProductCard key={product.name} product={product} />
@@ -159,4 +168,3 @@ export async function getStaticProps(context) {
     },
   };
 }
-
