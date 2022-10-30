@@ -7,6 +7,7 @@ import NoNav from "../../layouts/NoNav";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { urlFor, sanityClient } from "../../sanity";
+import ProductCard from "../../components/ProductCard";
 
 function DetailProduct(props) {
   const router = useRouter();
@@ -65,8 +66,8 @@ function DetailProduct(props) {
               ></i>
             </ButtonBase>
           </div>
-          <div className="w-full flex flex-col items-start justify-center px-7 pt-5">
-            <div className="flex justify-between items-start w-full">
+          <div className="w-full flex flex-col items-start justify-center pt-5">
+            <div className="flex justify-between items-start w-full px-7">
               <div className="">
                 <p className="text-xl font-bold text-black">
                   {props.product.name}
@@ -87,7 +88,7 @@ function DetailProduct(props) {
                 </p>
               </div>
             </div>
-            <div className="flex items-center my-2">
+            <div className="flex items-center my-2 px-7">
               <Rating
                 name="read-only"
                 value={4.5}
@@ -100,7 +101,7 @@ function DetailProduct(props) {
                 4.5 / 5
               </p>
             </div>
-            <div className="my-4">
+            <div className="my-4 px-7">
               <p className="text-md font-semibold mb-1">Description</p>
               <p className="text-sm text-slate-400">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga ad
@@ -110,29 +111,10 @@ function DetailProduct(props) {
               </p>
             </div>
             <div className="related-products my-4">
-              <p className="text-md mb-3 font-semibold">Related Products</p>
-              <div className="grid grid-cols-2 gap-3 w-full">
+              <p className="text-md mb-3 font-semibold px-7">Related Products</p>
+              <div className="grid grid-cols-2 gap-3 w-ful px-4">
                 {props.sneakers.map((sneaker) => (
-                  <Link href={`/sneakers/${sneaker._id}`} key={sneaker._id}>
-                    <div className="product-card">
-                      <div className="product-image overflow-hidden rounded-lg">
-                        <img src={urlFor(sneaker.image).url()} alt="" />
-                      </div>
-                      <div className="product-info py-0.5 px-1.5">
-                        <h1 className="product-name text-sm font-semibold">
-                          {sneaker.name}
-                        </h1>
-                        <div className="flex items-center">
-                          <h3 className="product-price font-semibold text-sm mr-1.5">
-                            ${sneaker.price}
-                          </h3>
-                          <h3 className="text-xs line-through text-slate-500">
-                            ${sneaker.oldPrice}
-                          </h3>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
+                  <ProductCard key={sneaker._id} product={sneaker} />
                 ))}
               </div>
             </div>
