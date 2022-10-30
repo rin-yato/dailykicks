@@ -155,7 +155,7 @@ export async function getStaticProps(context) {
   const brandName = context.params.brand;
 
   const brandQuery = `*[_type == "brand" && name == "${brandName}"][0]`;
-  const productQuery = `*[_type == "product" && brand->.name == "${brandName}"]{_id, name, brand->, category->, price, oldPrice, image}`;
+  const productQuery = `*[_type == "product" && brand->.name == "${brandName}"]{_id, name, brand->, category->, price, oldPrice, image, _createdAt}`;
   const categoryQuery = `*[_type == "category" && brand->.name == "${brandName}"]`;
 
   const brand = await sanityClient.fetch(brandQuery);

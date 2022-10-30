@@ -14,8 +14,9 @@ function index({ brands, products, categories }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [oldScroll, setOldScroll] = useState(0);
+  const [categoryProducts, setCategoryProducts] = useState(products);
   const [currentCategory, setCurrentCategory] = useState("All");
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [filteredProducts, setFilteredProducts] = useState(categoryProducts);
   const [filterDrawer, setFilterDrawer] = useState(false);
   const [priceRange, setPriceRange] = useState([0, 200]);
   const [isPopular, setIsPopular] = useState(false);
@@ -36,8 +37,7 @@ function index({ brands, products, categories }) {
   const handleFilter = (category) => {
     setCurrentCategory(category);
     if (category === "All") {
-      setFilteredProducts(products);
-      handleAllFilter();
+      setCategoryProducts(products);
     } else {
       let newFilteredProducts = products.filter(
         (product) => {
@@ -46,41 +46,41 @@ function index({ brands, products, categories }) {
           };
         }
       );
-      setFilteredProducts(newFilteredProducts);
-      handleAllFilter();
+      setCategoryProducts(newFilteredProducts);
       console.log(filteredProducts, newFilteredProducts)
     }
   };
 
   const filterPriceRange = ([min, max]) => {
-    let newFilteredProducts = products.filter(
+    let newFilteredProducts = categoryProducts.filter(
       (product) => product.price >= min && product.price <= max
     );
     setFilteredProducts(newFilteredProducts);
   };
 
   const filterPriceLowToHigh = () => {
-    let newFilteredProducts = products.sort((a, b) => a.price - b.price);
+    let newFilteredProducts = categoryProducts.sort((a, b) => a.price - b.price);
     setFilteredProducts(newFilteredProducts);
   };
 
   const filterPriceHighToLow = () => {
-    let newFilteredProducts = products.sort((a, b) => b.price - a.price);
+    let newFilteredProducts = categoryProducts.sort((a, b) => b.price - a.price);
     setFilteredProducts(newFilteredProducts);
   };
 
   const filterNewest = () => {
-    let newFilteredProducts = products.sort(
+    let newFilteredProducts = categoryProducts.sort(
       (a, b) => new Date(b._createdAt) - new Date(a._createdAt)
     );
     setFilteredProducts(newFilteredProducts);
   };
 
   const filterPopular = () => {
-    setFilteredProducts(filteredProducts);
+    setFilteredProducts(categoryProducts);
   };
 
   const handleAllFilter = () => {
+
     if (isPopular) filterPopular();
 
     if (isLowToHigh) filterPriceLowToHigh();
@@ -90,11 +90,12 @@ function index({ brands, products, categories }) {
     if (isNewest) filterNewest();
 
     filterPriceRange(priceRange);
+
   };
 
   useEffect(() => {
-    setFilteredProducts(products);
-  }, [products]);
+    setFilteredProducts(categoryProducts);
+  }, [categoryProducts]);
 
   useEffect(() => {
     handleAllFilter();
@@ -129,7 +130,7 @@ function index({ brands, products, categories }) {
         filterPriceLowToHigh={filterPriceLowToHigh}
         filterPriceHighToLow={filterPriceHighToLow}
       />
-      <main className="p-4 pt-[115px]">
+      <main className="p-4 pt-[115px] min-h-screen">
         <div className="flex justify-between items-center w-full pt-5 pb-2">
           <div className="font-bold">{currentCategory}</div>
           <ButtonBase
@@ -153,7 +154,7 @@ export default index;
 
 export async function getStaticProps(context) {
   const brandQuery = `*[_type == "brand"]`;
-  const productQuery = `*[_type == "product"]{_id, name, brand->, category->, price, oldPrice, image}`;
+  const productQuery = `*[_type == "product"]{_id, name, brand->, category->, price, oldPrice, _createdAt, image}`;
   const categoryQuery = `*[_type == "category"]`;
 
   const brands = await sanityClient.fetch(brandQuery);
