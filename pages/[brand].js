@@ -50,51 +50,54 @@ function Brand({ brand, products, categories }) {
       (product) => product.price >= min && product.price <= max
     );
     setFilteredProducts(newFilteredProducts);
+    console.log("price range", filteredProducts, products);
+    console.log("price range", priceRange);
   };
 
   const filterPriceLowToHigh = () => {
-    let newFilteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
+    let newFilteredProducts = products.sort((a, b) => a.price - b.price);
     setFilteredProducts(newFilteredProducts);
+    console.log("low", filteredProducts);
   };
-  
+
   const filterPriceHighToLow = () => {
-    let newFilteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
+    let newFilteredProducts = products.sort((a, b) => b.price - a.price);
     setFilteredProducts(newFilteredProducts);
+    console.log("hight", filteredProducts);
   };
 
   const filterNewest = () => {
-    let newFilteredProducts = filteredProducts.sort(
+    let newFilteredProducts = products.sort(
       (a, b) => new Date(b._createdAt) - new Date(a._createdAt)
     );
     setFilteredProducts(newFilteredProducts);
+    console.log("new", filteredProducts);
   };
 
   const filterPopular = () => {
-    setFilteredProducts(products);
+    setFilteredProducts(filteredProducts);
+    console.log("popular", filteredProducts);
   };
 
   const handleAllFilter = () => {
+    if (isPopular) filterPopular();
+
+    if (isLowToHigh) filterPriceLowToHigh();
+
+    if (isHighToLow) filterPriceHighToLow();
+
+    if (isNewest) filterNewest();
 
     filterPriceRange(priceRange);
-
-    isPopular && filterPopular();
-
-    isLowToHigh && filterPriceLowToHigh();
-
-    isHighToLow && filterPriceHighToLow();
-
-    isNewest && filterNewest();
-
   };
 
-
   useEffect(() => {
-    setFilteredProducts(products);
-  }, [products]);
+    setFilteredProducts(filteredProducts);
+  }, [filteredProducts]);
 
   useEffect(() => {
     handleAllFilter();
-  }, [isPopular, isLowToHigh, isHighToLow, isNewest, priceRange]);
+  }, [priceRange]);
 
   return (
     <div className="bg-slate-100 h-screen">
@@ -109,19 +112,22 @@ function Brand({ brand, products, categories }) {
       />
       <FilterDrawer
         setFilterDrawer={setFilterDrawer}
-        filterDrawer={ filterDrawer }
-        filterPriceRange={ filterPriceRange }
-        priceRange={ priceRange }
-        setPriceRange={ setPriceRange }
-        isPopular={ isPopular }
-        setIsPopular={ setIsPopular }
-        isLowToHigh={ isLowToHigh }
-        setIsLowToHigh={ setIsLowToHigh }
-        isHighToLow={ isHighToLow }
-        setIsHighToLow={ setIsHighToLow }
-        isNewest={ isNewest }
-        setIsNewest={ setIsNewest }
-        handleAllFilter={ handleAllFilter }
+        filterDrawer={filterDrawer}
+        filterPriceRange={filterPriceRange}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+        isPopular={isPopular}
+        setIsPopular={setIsPopular}
+        isLowToHigh={isLowToHigh}
+        setIsLowToHigh={setIsLowToHigh}
+        isHighToLow={isHighToLow}
+        setIsHighToLow={setIsHighToLow}
+        isNewest={isNewest}
+        setIsNewest={setIsNewest}
+        filterNewest={filterNewest}
+        filterPopular={filterPopular}
+        filterPriceLowToHigh={filterPriceLowToHigh}
+        filterPriceHighToLow={filterPriceHighToLow}
       />
       <main className="p-4 pt-[115px]">
         <div className="flex justify-between items-center w-full pt-5 pb-2">

@@ -86,14 +86,12 @@ function FilterDrawer({
   isHighToLow,
   setIsHighToLow,
   isNewest,
-    setIsNewest,
-  handleAllFilter,
+  setIsNewest,
+  filterNewest,
+  filterPopular,
+  filterPriceLowToHigh,
+  filterPriceHighToLow,
 }) {
-
-    React.useEffect(() => {
-        handleAllFilter();
-    }, [isPopular, isLowToHigh, isHighToLow, isNewest, priceRange]);
-
   return (
     <Drawer
       anchor="bottom"
@@ -117,6 +115,9 @@ function FilterDrawer({
             onClick={() => {
               setIsPopular(true);
               setIsNewest(false);
+              setIsLowToHigh(false);
+              setIsHighToLow(false);
+              filterPopular();
             }}
           >
             Popular
@@ -128,6 +129,9 @@ function FilterDrawer({
             onClick={() => {
               setIsPopular(false);
               setIsNewest(true);
+              setIsLowToHigh(false);
+              setIsHighToLow(false);
+              filterNewest();
             }}
           >
             New Arrival
@@ -143,6 +147,9 @@ function FilterDrawer({
               onClick={() => {
                 setIsLowToHigh(true);
                 setIsHighToLow(false);
+                setIsPopular(false);
+                setIsNewest(false);
+                filterPriceLowToHigh();
               }}
             >
               Low
@@ -154,6 +161,9 @@ function FilterDrawer({
               onClick={() => {
                 setIsLowToHigh(false);
                 setIsHighToLow(true);
+                setIsPopular(false);
+                setIsNewest(false);
+                filterPriceHighToLow();
               }}
             >
               High
@@ -164,9 +174,8 @@ function FilterDrawer({
             value={priceRange}
             getAriaLabel={() => "Price range"}
             onChange={(event, newValue) => setPriceRange(newValue)}
-            getAriaValueText={(value) => value}
+            getAriaValueText={(priceRange) => priceRange}
             max={250}
-            track="false"
             valueLabelFormat={(value) => `${value}$`}
           />
         </div>
