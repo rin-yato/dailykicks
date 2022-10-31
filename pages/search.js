@@ -5,7 +5,7 @@ import ProductCard from "../components/ProductCard";
 import { ButtonBase } from "@mui/material";
 import FilterDrawer from "../components/FilterDrawer";
 
-function search() {
+function Search() {
   const [results, setResults] = useState([]);
   const [products, setProducts] = useState([]);
   const [filterDrawer, setFilterDrawer] = useState(false);
@@ -127,4 +127,4 @@ function search() {
   );
 }
 
-export default search;
+export default Search;
