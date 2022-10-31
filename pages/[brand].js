@@ -24,9 +24,8 @@ function Brand({ brand, products, categories }) {
   const [isNewest, setIsNewest] = useState(false);
 
   const handleBack = () => {
-    // if there is history, then go back to the previous page
     // check if last history is daily-kicks
-    if (router.asPath.includes("dailykicks")) {
+    if ((window.location.href.includes("dailykicks") || window.location.href.includes("127.0.0.1") || window.location.href.includes('localhost')) && window.history.length > 1) {
       router.back();
     } else {
       router.push("/");

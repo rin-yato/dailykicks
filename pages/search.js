@@ -91,7 +91,7 @@ function Search() {
         filterPriceHighToLow={filterPriceHighToLow}
       />
       <SearchInput setResults={setResults} />
-      <main className="p-4 pt-[60px]">
+      <main className="p-4 pt-[60px] min-h-screen">
         <div className="flex justify-between items-center w-full pt-5 pb-2">
           <div className="font-bold">Search Results</div>
           <ButtonBase

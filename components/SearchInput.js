@@ -10,9 +10,8 @@ function SearchInput({ setResults }) {
   const inputRef = useRef(null);
 
   const handleBack = () => {
-    // if there is history, then go back to the previous page
     // check if last history is daily-kicks
-    if (router.asPath.includes("dailykicks")) {
+    if ((window.location.href.includes("dailykicks") || window.location.href.includes("127.0.0.1") || window.location.href.includes('localhost')) && window.history.length > 1) {
       router.back();
     } else {
       router.push("/");
@@ -26,7 +25,6 @@ function SearchInput({ setResults }) {
 
   const handleSearch = async () => {
     // on input change, fetch data from sanity
-    // const query = `*[_type == "product" && name match "*${input}*" || _type == "product" && category->.name match "*${input}*" || _type == "product" && brand->.name match "*${input}*"]`;
     const query = `*[_type == "product" && [name, category->.name, brand->.name] match "*${input}*"]`;
     const results = await sanityClient.fetch(query);
 
@@ -48,7 +46,7 @@ function SearchInput({ setResults }) {
 
   return (
     <div className="fixed top-0 left-0 right-0">
-      <div className="flex justify-between gap-1 relative py-1 pr-3 pl-1">
+      <div className="flex justify-between gap-1 relative py-1.5 px-3">
         <ButtonBase
           className="min-w-min h-min rounded-full p-1.5 bg-white"
           onClick={handleBack}
@@ -62,7 +60,7 @@ function SearchInput({ setResults }) {
             onChange={handleInput}
             value={input}
             placeholder="Search"
-            className="bg-slate-100 w-full py-0.5 px-3 appearance-none"
+            className="bg-slate-100 w-full py-1.5 px-3 appearance-none"
           />
           {input.length > 0 && (
             <ButtonBase
@@ -73,18 +71,6 @@ function SearchInput({ setResults }) {
             </ButtonBase>
           )}
         </div>
-        {/* <div className="absolute left-0 top-full pt-2 flex w-screen flex-col">
-          {searchResults &&
-            searchResults.map((result) => (
-              <ButtonBase
-                className="flex items-center gap-3 w-full justify-start px-2.5 py-2.5"
-                key={result._id}
-              >
-                <i className="bx bx-history bx-sm"></i>
-                <p className="text-base">{result.name}</p>
-              </ButtonBase>
-            ))}
-        </div> */}
       </div>
     </div>
   );
