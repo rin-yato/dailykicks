@@ -1,5 +1,5 @@
 import { ButtonBase } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { sanityClient } from "../sanity";
 import { useRouter } from "next/router";
 
@@ -7,6 +7,7 @@ function SearchInput({ setResults }) {
   const router = useRouter();
   const [input, setInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const inputRef = useRef(null);
 
   const handleBack = () => {
     // if there is history, then go back to the previous page
@@ -25,7 +26,8 @@ function SearchInput({ setResults }) {
 
   const handleSearch = async () => {
     // on input change, fetch data from sanity
-    const query = `*[_type == "product" && name match "*${input}*" || _type == "product" && category->.name match "*${input}*" || _type == "product" && brand->.name match "*${input}*"]`;
+    // const query = `*[_type == "product" && name match "*${input}*" || _type == "product" && category->.name match "*${input}*" || _type == "product" && brand->.name match "*${input}*"]`;
+    const query = `*[_type == "product" && [name, category->.name, brand->.name] match "*${input}*"]`;
     const results = await sanityClient.fetch(query);
 
     if (input.length <= 1) {
@@ -41,6 +43,7 @@ function SearchInput({ setResults }) {
     setInput("");
     setSearchResults([]);
     setResults([]);
+    inputRef.current.focus();
   };
 
   return (
@@ -54,6 +57,7 @@ function SearchInput({ setResults }) {
         </ButtonBase>
         <div className="flex items-center w-full relative">
           <input
+            ref={inputRef}
             type="text"
             onChange={handleInput}
             value={input}

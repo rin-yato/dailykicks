@@ -10,7 +10,7 @@ function Search() {
   const [products, setProducts] = useState([]);
   const [filterDrawer, setFilterDrawer] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(results);
-  const [priceRange, setPriceRange] = useState([0, 200]);
+  const [priceRange, setPriceRange] = useState([0, 250]);
   const [isPopular, setIsPopular] = useState(false);
   const [isLowToHigh, setIsLowToHigh] = useState(false);
   const [isHighToLow, setIsHighToLow] = useState(false);
@@ -21,19 +21,16 @@ function Search() {
       (product) => product.price >= min && product.price <= max
     );
     setFilteredProducts(newFilteredProducts);
-    console.log("filtered products", filteredProducts);
   };
 
   const filterPriceLowToHigh = () => {
     let newFilteredProducts = products.sort((a, b) => a.price - b.price);
     setFilteredProducts(newFilteredProducts);
-    console.log("low", filteredProducts);
   };
 
   const filterPriceHighToLow = () => {
     let newFilteredProducts = products.sort((a, b) => b.price - a.price);
     setFilteredProducts(newFilteredProducts);
-    console.log("hight", filteredProducts);
   };
 
   const filterNewest = () => {
@@ -41,7 +38,6 @@ function Search() {
       (a, b) => new Date(b._createdAt) - new Date(a._createdAt)
     );
     setFilteredProducts(newFilteredProducts);
-    console.log("new", filteredProducts);
   };
 
   const filterPopular = () => {
