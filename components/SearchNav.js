@@ -1,6 +1,7 @@
 import React from "react";
 import { ButtonBase } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 
 function SearchNav({ setIsOpen, handleBack, brand, categories, handleFilter }) {
   const subCategoryContainer = useRef(null);
@@ -38,9 +39,11 @@ function SearchNav({ setIsOpen, handleBack, brand, categories, handleFilter }) {
           <div className="font-bold">{brand ? brand.name : "All Sneakers"}</div>
         </div>
         <div className="flex items-center gap-2">
-          <ButtonBase className="min-w-min h-min rounded-full p-1.5 bg-white">
-            <i className="bx bx-search bx-sm"></i>
-          </ButtonBase>
+          <Link href={'/search'}>
+              <ButtonBase className="min-w-min h-min rounded-full p-1.5 bg-white">
+                <i className="bx bx-search bx-sm"></i>
+              </ButtonBase>
+          </Link>
           <ButtonBase
             className="min-w-min h-min rounded-full p-1.5 bg-white"
             onClick={() => setIsOpen(true)}

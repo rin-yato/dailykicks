@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+import { useState, useEffect } from "react";
 import SearchInput from "../components/SearchInput";
 import ProductCard from "../components/ProductCard";
 import { ButtonBase } from "@mui/material";
-import { useState, useEffect } from "react";
 import FilterDrawer from "../components/FilterDrawer";
 
 function search() {
@@ -15,16 +15,6 @@ function search() {
   const [isLowToHigh, setIsLowToHigh] = useState(false);
   const [isHighToLow, setIsHighToLow] = useState(false);
   const [isNewest, setIsNewest] = useState(false);
-
-  const handleBack = () => {
-    // if there is history, then go back to the previous page
-    // check if last history is daily-kicks
-    if (router.asPath.includes("dailykicks")) {
-      router.back();
-    } else {
-      router.push("/");
-    }
-  };
 
   const filterPriceRange = ([min, max]) => {
     let newFilteredProducts = products.filter(

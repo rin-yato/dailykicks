@@ -1,10 +1,22 @@
 import { ButtonBase } from "@mui/material";
 import { useState, useEffect } from "react";
 import { sanityClient } from "../sanity";
+import { useRouter } from "next/router";
 
 function SearchInput({ setResults }) {
+  const router = useRouter();
   const [input, setInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
+  const handleBack = () => {
+    // if there is history, then go back to the previous page
+    // check if last history is daily-kicks
+    if (router.asPath.includes("dailykicks")) {
+      router.back();
+    } else {
+      router.push("/");
+    }
+  };
 
   const handleInput = (e) => {
     setInput(e.target.value);
@@ -34,7 +46,10 @@ function SearchInput({ setResults }) {
   return (
     <div className="fixed top-0 left-0 right-0">
       <div className="flex justify-between gap-1 relative py-1 pr-3 pl-1">
-        <ButtonBase className="min-w-min h-min rounded-full p-1.5 bg-white">
+        <ButtonBase
+          className="min-w-min h-min rounded-full p-1.5 bg-white"
+          onClick={handleBack}
+        >
           <i className="bx bxs-chevron-left bx-sm text-black"></i>
         </ButtonBase>
         <div className="flex items-center w-full relative">
@@ -42,6 +57,7 @@ function SearchInput({ setResults }) {
             type="text"
             onChange={handleInput}
             value={input}
+            placeholder="Search"
             className="bg-slate-100 w-full py-0.5 px-3 appearance-none"
           />
           {input.length > 0 && (
