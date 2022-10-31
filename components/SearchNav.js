@@ -9,6 +9,7 @@ function SearchNav({ setIsOpen, handleBack, brand, categories, handleFilter }) {
   let oldScrollY = 0;
 
   const [direction, setDirection] = useState("up");
+  const [activeCategory, setActiveCategory] = useState("All");
 
   const controlDirection = () => {
     if (window.scrollY > oldScrollY) {
@@ -39,10 +40,10 @@ function SearchNav({ setIsOpen, handleBack, brand, categories, handleFilter }) {
           <div className="font-bold">{brand ? brand.name : "All Sneakers"}</div>
         </div>
         <div className="flex items-center gap-2">
-          <Link href={'/search'}>
-              <ButtonBase className="min-w-min h-min rounded-full p-1.5 bg-white">
-                <i className="bx bx-search bx-sm"></i>
-              </ButtonBase>
+          <Link href={"/search"}>
+            <ButtonBase className="min-w-min h-min rounded-full p-1.5 bg-white">
+              <i className="bx bx-search bx-sm"></i>
+            </ButtonBase>
           </Link>
           <ButtonBase
             className="min-w-min h-min rounded-full p-1.5 bg-white"
@@ -61,14 +62,34 @@ function SearchNav({ setIsOpen, handleBack, brand, categories, handleFilter }) {
       >
         <div className="flex relative justify-between items-center gap-3 w-screen overflow-x-scroll no-scroll">
           <div className="flex justify-between items-center px-3 py-3 gap-3">
-            <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5" onClick={() => handleFilter("All")}>
+            <div
+              className={`text-sm bg-slate-100 px-2 rounded-full py-0.5 ${
+                activeCategory === "All" ? "text-white bg-black" : ""
+              }`}
+              onClick={() => {
+                handleFilter("All");
+                setActiveCategory("All");
+              }}
+            >
               All
             </div>
-            {categories && categories.map((category) => (
-              <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5" key={category._id} onClick={() => handleFilter(category.name)} ref={categoryPills}>
-                {category.name}
-              </div>
-            ))}
+            {categories &&
+              categories.map((category) => (
+                <div
+                  className={`text-sm bg-slate-100 px-2 rounded-full py-0.5 ${
+                    activeCategory === category.name
+                      ? "text-white bg-black"
+                      : ""
+                  }`}
+                  key={category._id}
+                  onClick={() => {
+                    handleFilter(category.name);
+                    setActiveCategory(category.name);
+                  }}
+                >
+                  {category.name}
+                </div>
+              ))}
           </div>
         </div>
       </div>
