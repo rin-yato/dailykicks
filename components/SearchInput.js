@@ -46,7 +46,7 @@ function SearchInput({ setResults }) {
 
   return (
     <div className="fixed top-0 left-0 right-0">
-      <div className="flex justify-between gap-1 relative py-1.5 px-3">
+      <div className="flex justify-between gap-1 relative py-2.5 px-3">
         <ButtonBase
           className="min-w-min h-min rounded-full p-1.5 bg-white"
           onClick={handleBack}
@@ -60,11 +60,11 @@ function SearchInput({ setResults }) {
             onChange={handleInput}
             value={input}
             placeholder="Search"
-            className="bg-slate-100 w-full py-1.5 px-3 appearance-none"
+            className="bg-slate-100 w-full py-1.5 px-4 appearance-none rounded-full focus:outline-none"
           />
           {input.length > 0 && (
             <ButtonBase
-              className="min-w-min h-min rounded-full absolute right-0 mr-0.5"
+              className="min-w-min h-min rounded-full absolute right-1.5 mr-0.5"
               onClick={() => handleClear()}
             >
               <i className="bx bx-x bx-sm"></i>

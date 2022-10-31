@@ -65,7 +65,7 @@ function SearchNav({ setIsOpen, handleBack, brand, categories, handleFilter }) {
               All
             </div>
             {categories && categories.map((category) => (
-              <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5" key={category._id} onClick={() => handleFilter(category.name)}>
+              <div className="text-sm bg-slate-100 px-2 rounded-full py-0.5" key={category._id} onClick={() => handleFilter(category.name)} ref={categoryPills}>
                 {category.name}
               </div>
             ))}
