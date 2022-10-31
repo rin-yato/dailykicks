@@ -146,10 +146,10 @@ function index({ brands, products, categories }) {
             <ProductCard key={product.name} product={product} />
           ))}
           {filteredProducts.length === 0 && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-screen">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-full">
               <img
                 src="/emptyState/1.png"
-                className=" scale-125"
+                className=""
                 alt={"empty"}
               />
               <div className="text-center mt-7">

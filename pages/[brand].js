@@ -39,7 +39,11 @@ function Brand({ brand, products, categories }) {
       setFilteredProducts(products);
     } else {
       let newFilteredProducts = products.filter(
-        (product) => product.category.name === category
+        (product) => {
+          if (product.category) {
+            return product.category.name === category;
+          }
+        }
       );
       setFilteredProducts(newFilteredProducts);
     }
@@ -90,6 +94,10 @@ function Brand({ brand, products, categories }) {
 
     filterPriceRange(priceRange);
   };
+  
+  useEffect(() => {
+    setFilteredProducts(products);
+  }, [products]);
 
   useEffect(() => {
     setFilteredProducts(filteredProducts);
@@ -142,6 +150,17 @@ function Brand({ brand, products, categories }) {
         <div className="product-container grid grid-cols-2 gap-4">
           {filteredProducts.map((product) =>
             product ? <ProductCard key={product._id} product={product} /> : ""
+          )}
+          {filteredProducts.length === 0 && (
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-full">
+              <img src="/emptyState/1.png" className="" alt={"empty"} />
+              <div className="text-center mt-7">
+                <h1 className="text-xl font-bold">No Products Found</h1>
+                <p className="text-sm text-gray-500">
+                  Try changing your filter or search again
+                </p>
+              </div>
+            </div>
           )}
         </div>
       </main>
