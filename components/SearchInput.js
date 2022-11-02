@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 
 function SearchInput({ setResults }) {
   const router = useRouter();
-  const [input, setInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const inputRef = useRef(null);
 
@@ -19,16 +18,22 @@ function SearchInput({ setResults }) {
   };
 
   const handleInput = (e) => {
-    setInput(e.target.value);
+    inputRef.current.value = e.target.value;
     handleSearch();
+  };
+
+  const handleGo = (e) => {
+    if (e.key === "Enter") {
+      inputRef.current.blur();
+    }
   };
 
   const handleSearch = async () => {
     // on input change, fetch data from sanity
-    const query = `*[_type == "product" && [name, category->.name, brand->.name] match "*${input}*"]`;
+    const query = `*[_type == "product" && [name, category->.name, brand->.name] match "*${inputRef.current.value}*"]`;
     const results = await sanityClient.fetch(query);
 
-    if (input.length <= 1) {
+    if (inputRef.current.value.length === 0) {
       setSearchResults([]);
       setResults([]);
     } else {
@@ -38,7 +43,7 @@ function SearchInput({ setResults }) {
   };
 
   const handleClear = () => {
-    setInput("");
+    inputRef.current.value = "";
     setSearchResults([]);
     setResults([]);
     inputRef.current.focus();
@@ -57,12 +62,12 @@ function SearchInput({ setResults }) {
           <input
             ref={inputRef}
             type="text"
-            onChange={handleInput}
-            value={input}
+            onKeyDown={ handleGo }
+            onChange={ handleInput }
             placeholder="Search"
             className="bg-slate-100 w-full py-1.5 px-4 appearance-none rounded-full focus:outline-none"
           />
-          {input.length > 0 && (
+          {inputRef.current && inputRef.current.value.length > 0 && (
             <ButtonBase
               className="min-w-min h-min rounded-full absolute right-1.5 mr-0.5"
               onClick={() => handleClear()}
