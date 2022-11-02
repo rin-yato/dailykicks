@@ -10,7 +10,7 @@ import { sanityClient, urlFor } from "../sanity";
 export default function Home({ sneakers }) {
   return (
     <Layout>
-      <main className="min-h-screen w-screen overflow-x-hidden">
+      <main className="min-h-screen w-screen overflow-x-hidden bg-white">
         <section
           className="w-full h-[60vh] relative flex flex-col justify-end items-center mb-4"
           id="hero"

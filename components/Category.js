@@ -22,7 +22,7 @@ function Category({ isOpen, setIsOpen }) {
   return (
     <div>
       <Drawer anchor="right" open={isOpen} variant="persistent">
-        <div className=" bg-slate-100 w-screen">
+        <div className=" bg-slate-100 w-screen h-full">
           <header className="flex justify-between items-center py-1.5 px-3 bg-white">
             <p className="uppercase font-bold mt-0.5 ml-3">category</p>
             <ButtonBase
@@ -38,7 +38,7 @@ function Category({ isOpen, setIsOpen }) {
               {sneakerBrands}
             </div>
           </div>
-          <div className="mt-4 py-3 px-4 pb-16">
+          {/* <div className="mt-4 py-3 px-4 pb-16">
             <h2 className="font-bold mb-2">Accessories</h2>
             <div className="accessories-container">
               <ButtonBase className="h-[127px] overflow-hidden flex rounded-md shadow-md">
@@ -66,7 +66,7 @@ function Category({ isOpen, setIsOpen }) {
                 <div className="overlay absolute inset-0 bg-slate-500 opacity-80 backdrop-blur-sm"></div>
               </ButtonBase>
             </div>
-          </div>
+          </div> */}
         </div>
       </Drawer>
     </div>

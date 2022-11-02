@@ -42,7 +42,7 @@ export default function Aside() {
         <i className="bx bx-x bx-sm text-black"></i>
       </Button>
       <List className="pt-20">
-        {["Sneakers", "Accessories", "About", "Contact"].map((text, index) => (
+        {["Sneakers", "About", "Contact"].map((text, index) => (
           <Link href={`/${text.toLowerCase()}`} key={text}>
             <ListItem button key={text} className="my-4">
               <ListItemText

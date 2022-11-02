@@ -3,7 +3,7 @@ import { ButtonBase } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
-function SearchNav({ setIsOpen, handleBack, brand, categories, handleFilter }) {
+function SearchNav({ setIsOpen, handleBack, brand, categories, handleFilter, accessories }) {
   const subCategoryContainer = useRef(null);
 
   let oldScrollY = 0;
@@ -37,7 +37,7 @@ function SearchNav({ setIsOpen, handleBack, brand, categories, handleFilter }) {
           >
             <i className="bx bxs-chevron-left bx-sm text-black"></i>
           </ButtonBase>
-          <div className="font-bold">{brand ? brand.name : "All Sneakers"}</div>
+          <div className="font-bold">{brand ? brand.name : (accessories ? "Accessories" : "All Sneakers")}</div>
         </div>
         <div className="flex items-center gap-2">
           <Link href={"/search"}>
