@@ -12,7 +12,7 @@ function SearchNav({ setIsOpen, handleBack, brand, categories, handleFilter }) {
   const [activeCategory, setActiveCategory] = useState("All");
 
   const controlDirection = () => {
-    if (window.scrollY > oldScrollY) {
+    if (window.scrollY > oldScrollY && window.scrollY > 300) {
       setDirection("down");
     } else {
       setDirection("up");
