@@ -10,7 +10,7 @@ import SearchNav from "../../components/SearchNav";
 import { sanityClient, urlFor } from "../../sanity";
 import FilterDrawer from "../../components/FilterDrawer";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import MotionFade from "../../MotionAnimation/components/MotionFade";
 
 function index({ brands, products, categories }) {
   const router = useRouter();
@@ -104,72 +104,68 @@ function index({ brands, products, categories }) {
   }, [priceRange]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={ { opacity: 0 } }
-      transition={{ duration: 0.05 }}
-      className={`bg-slate-100 h-full`}
-    >
-      <Category isOpen={isOpen} setIsOpen={setIsOpen} />
-      <SearchNav
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        handleBack={handleBack}
-        categories={categories}
-        handleFilter={handleFilter}
-      />
-      <FilterDrawer
-        setFilterDrawer={setFilterDrawer}
-        filterDrawer={filterDrawer}
-        filterPriceRange={filterPriceRange}
-        priceRange={priceRange}
-        setPriceRange={setPriceRange}
-        isPopular={isPopular}
-        setIsPopular={setIsPopular}
-        isLowToHigh={isLowToHigh}
-        setIsLowToHigh={setIsLowToHigh}
-        isHighToLow={isHighToLow}
-        setIsHighToLow={setIsHighToLow}
-        isNewest={isNewest}
-        setIsNewest={setIsNewest}
-        filterNewest={filterNewest}
-        filterPopular={filterPopular}
-        filterPriceLowToHigh={filterPriceLowToHigh}
-        filterPriceHighToLow={filterPriceHighToLow}
-      />
-      <main
-        className={`p-4 pt-[115px] ${
-          isOpen ? "h-screen overflow-y-hidden" : ""
-        }`}
-      >
-        <div className="flex justify-between items-center w-full pt-5 pb-2">
-          <div className="font-bold">{currentCategory}</div>
-          <ButtonBase
-            className="p-1 rounded-full"
-            onClick={() => setFilterDrawer(true)}
-          >
-            <i className="bx bx-slider bx-sm"></i>
-          </ButtonBase>
-        </div>
-        <div className="product-container grid grid-cols-2 gap-4">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.name} product={product} />
-          ))}
-          {filteredProducts.length === 0 && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-full">
-              <img src="/emptyState/1.png" className="" alt={"empty"} />
-              <div className="text-center mt-7">
-                <h1 className="text-xl font-bold">No Products Found</h1>
-                <p className="text-sm text-gray-500">
-                  Try changing your filter or search again
-                </p>
+    <MotionFade>
+      <div className={`bg-slate-100 h-full`}>
+        <Category isOpen={isOpen} setIsOpen={setIsOpen} />
+        <SearchNav
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          handleBack={handleBack}
+          categories={categories}
+          handleFilter={handleFilter}
+        />
+        <FilterDrawer
+          setFilterDrawer={setFilterDrawer}
+          filterDrawer={filterDrawer}
+          filterPriceRange={filterPriceRange}
+          priceRange={priceRange}
+          setPriceRange={setPriceRange}
+          isPopular={isPopular}
+          setIsPopular={setIsPopular}
+          isLowToHigh={isLowToHigh}
+          setIsLowToHigh={setIsLowToHigh}
+          isHighToLow={isHighToLow}
+          setIsHighToLow={setIsHighToLow}
+          isNewest={isNewest}
+          setIsNewest={setIsNewest}
+          filterNewest={filterNewest}
+          filterPopular={filterPopular}
+          filterPriceLowToHigh={filterPriceLowToHigh}
+          filterPriceHighToLow={filterPriceHighToLow}
+        />
+        <main
+          className={`p-4 pt-[115px] ${
+            isOpen ? "h-screen overflow-y-hidden" : ""
+          }`}
+        >
+          <div className="flex justify-between items-center w-full pt-5 pb-2">
+            <div className="font-bold">{currentCategory}</div>
+            <ButtonBase
+              className="p-1 rounded-full"
+              onClick={() => setFilterDrawer(true)}
+            >
+              <i className="bx bx-slider bx-sm"></i>
+            </ButtonBase>
+          </div>
+          <div className="product-container grid grid-cols-2 gap-4">
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.name} product={product} />
+            ))}
+            {filteredProducts.length === 0 && (
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-full">
+                <img src="/emptyState/1.png" className="" alt={"empty"} />
+                <div className="text-center mt-7">
+                  <h1 className="text-xl font-bold">No Products Found</h1>
+                  <p className="text-sm text-gray-500">
+                    Try changing your filter or search again
+                  </p>
+                </div>
               </div>
-            </div>
-          )}
-        </div>
-      </main>
-    </motion.div>
+            )}
+          </div>
+        </main>
+      </div>
+    </MotionFade>
   );
 }
 
