@@ -45,8 +45,8 @@ export default function Aside() {
       >
         <i className="bx bx-x bx-sm text-black"></i>
       </Button>
-      <List className="pt-20">
-        {["Sneakers", "About", "Contact"].map((text, index) => (
+      <List className="pt-20 mb-5">
+        {["Sneakers", "About"].map((text, index) => (
           <Link href={`/${text.toLowerCase()}`} key={text}>
             <ListItem button key={text} className="my-4">
               <ListItemText
@@ -58,24 +58,32 @@ export default function Aside() {
           </Link>
         ))}
       </List>
-      <List className="w-full flex flex-col items-center gap-5 mt-10">
-        <a href="https://www.facebook.com/Dailykicks.kh" >
-          <ButtonBase className="bg-[#0775E7] p-2 w-min rounded-full">
+      <Divider />
+      <List className="w-full flex flex-col items-center gap-5 mt-5">
+        <ListItem className="my-4">
+          <ListItemText
+            primary={'Contact'}
+            disableTypography
+            className=" text-center font-semibold"
+          />
+        </ListItem>
+        <a href="https://www.facebook.com/Dailykicks.kh">
+          <ButtonBase className="bg-[#0775E7] p-1.5 w-min rounded-full">
             <i className="bx bxl-facebook bx-md text-white"></i>
           </ButtonBase>
         </a>
         <a href="https://www.instagram.com/dailykicks.kh/">
-          <ButtonBase className="instagram-bg p-2 w-min rounded-full">
+          <ButtonBase className="instagram-bg p-1.5 w-min rounded-full">
             <i className="bx bxl-instagram bx-md text-white"></i>
           </ButtonBase>
         </a>
         <a href="https://t.me/Dailyshoes_kh">
-          <ButtonBase className="bg-[#279AD2] p-2 w-min rounded-full">
+          <ButtonBase className="bg-[#279AD2] p-1.5 w-min rounded-full">
             <i className="bx bxl-telegram bx-md text-white -translate-x-0.5"></i>
           </ButtonBase>
         </a>
         <a href="tel:086888217">
-          <ButtonBase className="bg-[#51E45B] p-2 w-min rounded-full">
+          <ButtonBase className="bg-[#51E45B] p-1.5 w-min rounded-full">
             <i className="bx bxs-phone bx-md text-white"></i>
           </ButtonBase>
         </a>
