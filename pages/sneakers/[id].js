@@ -69,14 +69,19 @@ function DetailProduct(props) {
                 <i className="bx bxs-share-alt bx-sm text-black"></i>
               </ButtonBase>
             </div>
-            <div className="bg-slate-200 relative">
-              <img src={urlFor(props.product.image).url()} className="" />
-              <ButtonBase className=" absolute bottom-0 left-0 m-4 min-w-min rounded-full p-1 bg-white">
+            <div className="bg-slate-200 relative overflow-x-scroll snap-x snap-mandatory">
+              <div className="flex">
+                <img src={ urlFor(props.product.image).url() } className="snap-center" />
+                { props.product.images && props.product.images.map((image, index) => (
+                  <img src={ urlFor(image).url() } className="snap-center" alt="image" key={index}/>
+                ))}
+              </div>
+              {/* <ButtonBase className=" absolute bottom-0 left-0 m-4 min-w-min rounded-full p-1 bg-white">
                 <i
                   className="bx bxs-heart bx-sm text-slate-700"
                   onClick={handleLike}
                 ></i>
-              </ButtonBase>
+              </ButtonBase> */}
             </div>
             <div className="w-full flex flex-col items-start justify-center pt-5">
               <div className="flex justify-between items-start w-full px-7">
@@ -173,6 +178,7 @@ export async function getStaticProps(Context) {
     description,
     brand->,
     category->,
+    images,
   }`;
 
   const sneakers = await sanityClient.fetch(sneakerQuery);

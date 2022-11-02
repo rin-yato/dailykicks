@@ -43,11 +43,17 @@ export default {
         },
         {
             name: 'image',
-            title: 'Product Image',
+            title: 'Product Thumbnail',
             type: 'image',
             options: {
                 hotspot: true,
             },
+        },
+        {
+            name: 'images',
+            title: 'Product Images',
+            type: 'array',
+            of: [{ type: 'image' }],
         },
     ],
 }
