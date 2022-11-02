@@ -3,16 +3,15 @@
 import { ButtonBase } from "@mui/material";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Category from "../../components/Category";
+import Category from "../components/Category";
 import { useEffect, useState } from "react";
-import ProductCard from "../../components/ProductCard";
-import SearchNav from "../../components/SearchNav";
-import { sanityClient, urlFor } from "../../sanity";
-import FilterDrawer from "../../components/FilterDrawer";
+import ProductCard from "../components/ProductCard";
+import SearchNav from "../components/SearchNav";
+import { sanityClient, urlFor } from "../sanity";
+import FilterDrawer from "../components/FilterDrawer";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
-function index({ brands, products, categories }) {
+function Accessories({ brands, products, categories }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [oldScroll, setOldScroll] = useState(0);
@@ -104,19 +103,14 @@ function index({ brands, products, categories }) {
   }, [priceRange]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={ { opacity: 0 } }
-      transition={{ duration: 0.75 }}
-      className={`bg-slate-100 h-full`}
-    >
+    <div className="bg-slate-100">
       <Category isOpen={isOpen} setIsOpen={setIsOpen} />
       <SearchNav
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         handleBack={handleBack}
         categories={categories}
+        accessories={true}
         handleFilter={handleFilter}
       />
       <FilterDrawer
@@ -138,11 +132,7 @@ function index({ brands, products, categories }) {
         filterPriceLowToHigh={filterPriceLowToHigh}
         filterPriceHighToLow={filterPriceHighToLow}
       />
-      <main
-        className={`p-4 pt-[115px] ${
-          isOpen ? "h-screen overflow-y-hidden" : ""
-        }`}
-      >
+      <main className="p-4 pt-[115px] min-h-full">
         <div className="flex justify-between items-center w-full pt-5 pb-2">
           <div className="font-bold">{currentCategory}</div>
           <ButtonBase
@@ -169,11 +159,11 @@ function index({ brands, products, categories }) {
           )}
         </div>
       </main>
-    </motion.div>
+    </div>
   );
 }
 
-export default index;
+export default Accessories;
 
 export async function getStaticProps(context) {
   const brandQuery = `*[_type == "brand"]`;

@@ -4,6 +4,7 @@ import SearchInput from "../components/SearchInput";
 import ProductCard from "../components/ProductCard";
 import { ButtonBase } from "@mui/material";
 import FilterDrawer from "../components/FilterDrawer";
+import { motion } from "framer-motion";
 
 function Search() {
   const [results, setResults] = useState([]);
@@ -70,7 +71,12 @@ function Search() {
   }, [priceRange]);
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.75 }}
+    >
       <FilterDrawer
         setFilterDrawer={setFilterDrawer}
         filterDrawer={filterDrawer}
@@ -107,19 +113,19 @@ function Search() {
               product ? <ProductCard key={product._id} product={product} /> : ""
             )}
         </div>
-          {(filteredProducts === null || filteredProducts.length === 0) && (
-            <div className="flex flex-col items-center w-full mt-20">
-              <img src="/emptyState/1.png" className="" alt={"empty"} />
-              <div className="text-center mt-7">
-                <h1 className="text-xl font-bold">No Products Found</h1>
-                <p className="text-sm text-gray-500">
-                  Try changing your filter or search again
-                </p>
-              </div>
+        {(filteredProducts === null || filteredProducts.length === 0) && (
+          <div className="flex flex-col items-center w-full mt-20">
+            <img src="/emptyState/1.png" className="" alt={"empty"} />
+            <div className="text-center mt-7">
+              <h1 className="text-xl font-bold">No Products Found</h1>
+              <p className="text-sm text-gray-500">
+                Try changing your filter or search again
+              </p>
             </div>
-          )}
+          </div>
+        )}
       </main>
-    </div>
+    </motion.div>
   );
 }
 

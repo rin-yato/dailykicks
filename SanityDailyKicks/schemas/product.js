@@ -21,6 +21,12 @@ export default {
             to: { type: 'category' },
         },
         {
+            name: 'featured',
+            title: 'Featured',
+            type: 'boolean',
+            default: false,
+        },
+        {
             name: 'description',
             title: 'Product Description',
             type: 'text',

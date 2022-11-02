@@ -9,6 +9,7 @@ import ProductCard from "../components/ProductCard";
 import SearchNav from "../components/SearchNav";
 import { sanityClient, urlFor } from "../sanity";
 import FilterDrawer from "../components/FilterDrawer";
+import { motion } from "framer-motion";
 
 function Brand({ brand, products, categories }) {
   const router = useRouter();
@@ -25,7 +26,12 @@ function Brand({ brand, products, categories }) {
 
   const handleBack = () => {
     // check if last history is daily-kicks
-    if ((window.location.href.includes("dailykicks") || window.location.href.includes("127.0.0.1") || window.location.href.includes('localhost')) && window.history.length > 1) {
+    if (
+      (window.location.href.includes("dailykicks") ||
+        window.location.href.includes("127.0.0.1") ||
+        window.location.href.includes("localhost")) &&
+      window.history.length > 1
+    ) {
       router.back();
     } else {
       router.push("/");
@@ -37,13 +43,11 @@ function Brand({ brand, products, categories }) {
     if (category === "All") {
       setFilteredProducts(products);
     } else {
-      let newFilteredProducts = products.filter(
-        (product) => {
-          if (product.category) {
-            return product.category.name === category;
-          }
+      let newFilteredProducts = products.filter((product) => {
+        if (product.category) {
+          return product.category.name === category;
         }
-      );
+      });
       setFilteredProducts(newFilteredProducts);
     }
   };
@@ -93,7 +97,7 @@ function Brand({ brand, products, categories }) {
 
     filterPriceRange(priceRange);
   };
-  
+
   useEffect(() => {
     setFilteredProducts(products);
   }, [products]);
@@ -107,7 +111,13 @@ function Brand({ brand, products, categories }) {
   }, [priceRange]);
 
   return (
-    <div className="bg-slate-100 h-full">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.75 }}
+      className={`bg-slate-100 h-full`}
+    >
       <Category isOpen={isOpen} setIsOpen={setIsOpen} />
       <SearchNav
         isOpen={isOpen}
@@ -136,7 +146,11 @@ function Brand({ brand, products, categories }) {
         filterPriceLowToHigh={filterPriceLowToHigh}
         filterPriceHighToLow={filterPriceHighToLow}
       />
-      <main className="p-4 pt-[115px]">
+      <main
+        className={`p-4 pt-[115px] ${
+          isOpen ? "h-screen overflow-y-hidden" : ""
+        }`}
+      >
         <div className="flex justify-between items-center w-full pt-5 pb-2">
           <div className="font-bold">{currentCategory}</div>
           <ButtonBase
@@ -163,7 +177,7 @@ function Brand({ brand, products, categories }) {
           )}
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 }
 

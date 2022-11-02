@@ -31,6 +31,7 @@ body {
   display: none;
 }
 
+
 .mui-style-mm42gz-MuiButtonBase-root-MuiFab-root {
   background-color: #F1F5F9;
 }
@@ -52,5 +53,9 @@ body {
 
 .text-stroke {
   -webkit-text-stroke: 7px #cae4ff;
+}
+
+.instagram-bg {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
 }
 

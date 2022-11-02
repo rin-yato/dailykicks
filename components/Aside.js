@@ -13,6 +13,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import { useContext } from "react";
 import { Context } from "../layouts/Layout";
 import Link from "next/link";
+import { ButtonBase } from "@mui/material";
 
 export default function Aside() {
   const { isOpen, setValue } = useContext(Context);
@@ -38,7 +39,10 @@ export default function Aside() {
       role="presentation"
       onKeyDown={toggleDrawer(false)}
     >
-      <Button className="float-right z-30 p-1 mr-1.5 mt-1 min-w-min min-h-min rounded-full" onClick={toggleDrawer(false, 50)}>
+      <Button
+        className="float-right z-30 p-1 mr-1.5 mt-1 min-w-min min-h-min rounded-full"
+        onClick={toggleDrawer(false, 50)}
+      >
         <i className="bx bx-x bx-sm text-black"></i>
       </Button>
       <List className="pt-20">
@@ -54,11 +58,33 @@ export default function Aside() {
           </Link>
         ))}
       </List>
+      <List className="w-full flex flex-col items-center gap-5 mt-10">
+        <a href="https://www.facebook.com/Dailykicks.kh" >
+          <ButtonBase className="bg-[#0775E7] p-2 w-min rounded-full">
+            <i className="bx bxl-facebook bx-md text-white"></i>
+          </ButtonBase>
+        </a>
+        <a href="https://www.instagram.com/dailykicks.kh/">
+          <ButtonBase className="instagram-bg p-2 w-min rounded-full">
+            <i className="bx bxl-instagram bx-md text-white"></i>
+          </ButtonBase>
+        </a>
+        <a href="https://t.me/Dailyshoes_kh">
+          <ButtonBase className="bg-[#279AD2] p-2 w-min rounded-full">
+            <i className="bx bxl-telegram bx-md text-white -translate-x-0.5"></i>
+          </ButtonBase>
+        </a>
+        <a href="tel:086888217">
+          <ButtonBase className="bg-[#51E45B] p-2 w-min rounded-full">
+            <i className="bx bxs-phone bx-md text-white"></i>
+          </ButtonBase>
+        </a>
+      </List>
     </Box>
   );
 
   return (
-    <div>
+    <div className="overflow-y-hidden">
       <React.Fragment key={"right"}>
         <Drawer anchor={"right"} open={isOpen} onClose={toggleDrawer(false)}>
           {list()}
