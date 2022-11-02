@@ -9,7 +9,9 @@ function MotionFade({ children }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.1, ease: "easeInOut" }}
     >
-      {children}
+      <motion.div initial="initial" animate="animate" exit="exit">
+        {children}
+      </motion.div>
     </motion.div>
   );
 }

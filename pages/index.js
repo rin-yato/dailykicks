@@ -8,6 +8,7 @@ import Layout from "../layouts/Layout";
 import { sanityClient, urlFor } from "../sanity";
 import { motion } from "framer-motion";
 import MotionFade from "../MotionAnimation/components/MotionFade";
+import Animation from "../MotionAnimation/Animation";
 
 export default function Home({ sneakers, newArrivals, featuredProducts }) {
   return (
@@ -20,38 +21,78 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
               id="hero"
             >
               <div className="relative mt-10 leading-[11rem] font-thin text-white text-[15rem] text-stroke">
-                AIR
-                <img
+                <motion.span
+                  variants={Animation.Fade}
+                  transition={{ duration: 0.5 }}
+                >
+                  AIR
+                </motion.span>
+                <motion.img
+                  animate={{ y: "23%", x: "-50%" }}
+                  initial={{ y: "23%", x: "50%" }}
+                  exit={{ y: "23%", x: "50%" }}
+                  transition={{ duration: 0.7, ease: "easeInOut", delay: 0.2 }}
                   src="/sneakers/air-force-blue.png"
                   alt=""
                   className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[23%]"
                 />
               </div>
-              <p className="p-6 text-center font-[500] leading-snug pb-4">
-                We provide the latest and greatest sneakers, with premium quality
-                from the best brands.
-              </p>
-              <Link href={"/sneakers"}>
-                <ButtonBase className="bg-slate-800 py-1.5 px-4 rounded font-bold text-white mmb-[75px]">
-                  SHOP NOW <i className="bx bx-right-arrow-alt bx-sm"></i>
-                </ButtonBase>
-              </Link>
+              <motion.p
+                variants={Animation.SlideUp}
+                transition={{ ease: "easeInOut", delay: 0.5 }}
+                className="p-6 text-center font-[500] leading-snug pb-4"
+              >
+                We provide the latest and greatest sneakers, with premium
+                quality from the best brands.
+              </motion.p>
+              <motion.div
+                variants={Animation.SlideUp}
+                transition={{ ease: "easeInOut", delay: 0.7 }}
+              >
+                <Link href={"/sneakers"}>
+                  <ButtonBase className="bg-slate-800 py-1.5 px-4 rounded font-bold text-white mmb-[75px]">
+                    SHOP NOW <i className="bx bx-right-arrow-alt bx-sm"></i>
+                  </ButtonBase>
+                </Link>
+              </motion.div>
             </section>
-            <section id="featured" className="flex flex-col justify-center py-14">
-              <h1 className="text-center font-extrabold text-3xl">Featured</h1>
-              <h3 className="text-[10px] font-semibold text-center">PRODUCTS</h3>
-              <div className="featured-container grid grid-cols-2 gap-3 px-3 mt-5">
+            <section
+              id="featured"
+              className="flex flex-col justify-center py-14"
+            >
+              <motion.h1
+                variants={Animation.SlideUp}
+                transition={{ delay: 0.9 }}
+                className="text-center font-extrabold text-3xl"
+              >
+                Featured
+              </motion.h1>
+              <motion.h3
+                variants={Animation.SlideUp}
+                transition={{ delay: 1.1 }}
+                className="text-[10px] font-semibold text-center"
+              >
+                PRODUCTS
+              </motion.h3>
+              <motion.div
+                variants={Animation.SlideUp} transition={{ delay: 1.3 }}
+                className="featured-container grid grid-cols-2 gap-3 px-3 mt-5"
+              >
                 {featuredProducts.map((sneaker) => (
-                  <ProductCard key={sneaker._id} product={sneaker} />
+                  <ProductCard product={sneaker} key={sneaker._id} />
                 ))}
-              </div>
+              </motion.div>
             </section>
             <section
               id="best-sellers"
               className="flex flex-col justify-center pb-14 pt-5"
             >
-              <h1 className="text-center font-extrabold text-3xl">New Arrival</h1>
-              <h3 className="text-[10px] font-semibold text-center">PRODUCTS</h3>
+              <h1 className="text-center font-extrabold text-3xl">
+                New Arrival
+              </h1>
+              <h3 className="text-[10px] font-semibold text-center">
+                PRODUCTS
+              </h3>
               <div className="featured-container grid grid-cols-2 gap-3 px-3 mt-5">
                 {newArrivals.map((sneaker) => (
                   <ProductCard key={sneaker._id} product={sneaker} />
