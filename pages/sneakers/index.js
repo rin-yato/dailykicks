@@ -131,7 +131,7 @@ function index({ brands, products, categories }) {
         filterPriceLowToHigh={filterPriceLowToHigh}
         filterPriceHighToLow={filterPriceHighToLow}
       />
-      <main className="p-4 pt-[115px] min-h-screen">
+      <main className="p-4 pt-[115px] min-h-full">
         <div className="flex justify-between items-center w-full pt-5 pb-2">
           <div className="font-bold">{currentCategory}</div>
           <ButtonBase

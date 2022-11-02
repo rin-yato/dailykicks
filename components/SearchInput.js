@@ -45,7 +45,7 @@ function SearchInput({ setResults }) {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0">
+    <div className="fixed top-0 left-0 right-0 bg-white z-50">
       <div className="flex justify-between gap-1 relative py-2.5 px-3">
         <ButtonBase
           className="min-w-min h-min rounded-full p-1.5 bg-white"

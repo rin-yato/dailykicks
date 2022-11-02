@@ -107,7 +107,7 @@ function Brand({ brand, products, categories }) {
   }, [priceRange]);
 
   return (
-    <div className="bg-slate-100 h-screen">
+    <div className="bg-slate-100 h-full">
       <Category isOpen={isOpen} setIsOpen={setIsOpen} />
       <SearchNav
         isOpen={isOpen}
