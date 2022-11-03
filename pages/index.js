@@ -13,7 +13,7 @@ import Animation from "../MotionAnimation/Animation";
 export default function Home({ sneakers, newArrivals, featuredProducts }) {
   return (
     <MotionFade>
-      <motion.div exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+      <motion.div>
         <Layout>
           <main className="min-h-screen w-screen overflow-x-hidden bg-white">
             <section

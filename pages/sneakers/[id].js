@@ -49,10 +49,7 @@ function DetailProduct(props) {
 
   return (
     <MotionFade>
-      <motion.div
-        variants={Animation.Fade}
-        exit={{ opacity: 0 }}
-      >
+      <motion.div>
         <NoNav>
           <div className="w-screen flex flex-col">
             <div className="flex flex-col items-center justify-center pt-[50px] pb-[80px]">

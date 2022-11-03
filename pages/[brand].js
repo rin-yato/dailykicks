@@ -21,7 +21,7 @@ function Brand({ brand, products, categories }) {
   const [currentCategory, setCurrentCategory] = useState("All");
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [filterDrawer, setFilterDrawer] = useState(false);
-  const [priceRange, setPriceRange] = useState([0, 200]);
+  const [priceRange, setPriceRange] = useState([0, 250]);
   const [isPopular, setIsPopular] = useState(false);
   const [isLowToHigh, setIsLowToHigh] = useState(false);
   const [isHighToLow, setIsHighToLow] = useState(false);
@@ -116,8 +116,6 @@ function Brand({ brand, products, categories }) {
   return (
     <MotionFade>
       <motion.div
-        variants={Animation.Fade}
-        exit={{ opacity: 0 }}
         className={`bg-slate-100 h-full`}
       >
         <Category isOpen={isOpen} setIsOpen={setIsOpen} />

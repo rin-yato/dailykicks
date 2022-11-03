@@ -75,10 +75,7 @@ function Search() {
 
   return (
     <MotionFade>
-      <motion.div
-        variants={Animation.Fade}
-        exit={{ opacity: 0 }}
-      >
+      <motion.div>
         <div>
           <FilterDrawer
             setFilterDrawer={setFilterDrawer}
