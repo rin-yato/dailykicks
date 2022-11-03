@@ -4,6 +4,8 @@ import SearchInput from "../components/SearchInput";
 import ProductCard from "../components/ProductCard";
 import { ButtonBase } from "@mui/material";
 import FilterDrawer from "../components/FilterDrawer";
+import { motion } from "framer-motion";
+import Animation from "../MotionAnimation/Animation";
 import MotionFade from "../MotionAnimation/components/MotionFade";
 
 function Search() {
@@ -72,56 +74,62 @@ function Search() {
 
   return (
     <MotionFade>
-      <div>
-        <FilterDrawer
-          setFilterDrawer={setFilterDrawer}
-          filterDrawer={filterDrawer}
-          filterPriceRange={filterPriceRange}
-          priceRange={priceRange}
-          setPriceRange={setPriceRange}
-          isPopular={isPopular}
-          setIsPopular={setIsPopular}
-          isLowToHigh={isLowToHigh}
-          setIsLowToHigh={setIsLowToHigh}
-          isHighToLow={isHighToLow}
-          setIsHighToLow={setIsHighToLow}
-          isNewest={isNewest}
-          setIsNewest={setIsNewest}
-          filterNewest={filterNewest}
-          filterPopular={filterPopular}
-          filterPriceLowToHigh={filterPriceLowToHigh}
-          filterPriceHighToLow={filterPriceHighToLow}
-        />
-        <SearchInput setResults={setResults} />
-        <main className="p-4 pt-[60px] min-h-screen">
-          <div className="flex justify-between items-center w-full pt-5 pb-2">
-            <div className="font-bold">Search Results</div>
-            <ButtonBase
-              className="p-1 rounded-full"
-              onClick={() => setFilterDrawer(true)}
-            >
-              <i className="bx bx-slider bx-sm"></i>
-            </ButtonBase>
-          </div>
-          <div className="product-container grid grid-cols-2 gap-4">
-            {filteredProducts &&
-              filteredProducts.map((product) =>
-                product ? <ProductCard key={product._id} product={product} /> : ""
-              )}
-          </div>
-          {(filteredProducts === null || filteredProducts.length === 0) && (
-            <div className="flex flex-col items-center w-full mt-20">
-              <img src="/emptyState/1.png" className="" alt={"empty"} />
-              <div className="text-center mt-7">
-                <h1 className="text-xl font-bold">No Products Found</h1>
-                <p className="text-sm text-gray-500">
-                  Try changing your filter or search again
-                </p>
-              </div>
+      <motion.div variants={Animation.Fade} exit={{ opacity:0.2 }} transition={{ duration: 0.4 }}>
+        <div>
+          <FilterDrawer
+            setFilterDrawer={setFilterDrawer}
+            filterDrawer={filterDrawer}
+            filterPriceRange={filterPriceRange}
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            isPopular={isPopular}
+            setIsPopular={setIsPopular}
+            isLowToHigh={isLowToHigh}
+            setIsLowToHigh={setIsLowToHigh}
+            isHighToLow={isHighToLow}
+            setIsHighToLow={setIsHighToLow}
+            isNewest={isNewest}
+            setIsNewest={setIsNewest}
+            filterNewest={filterNewest}
+            filterPopular={filterPopular}
+            filterPriceLowToHigh={filterPriceLowToHigh}
+            filterPriceHighToLow={filterPriceHighToLow}
+          />
+          <SearchInput setResults={setResults} />
+          <main className="p-4 pt-[60px] min-h-screen">
+            <div className="flex justify-between items-center w-full pt-5 pb-2">
+              <div className="font-bold">Search Results</div>
+              <ButtonBase
+                className="p-1 rounded-full"
+                onClick={() => setFilterDrawer(true)}
+              >
+                <i className="bx bx-slider bx-sm"></i>
+              </ButtonBase>
             </div>
-          )}
-        </main>
-      </div>
+            <div className="product-container grid grid-cols-2 gap-4">
+              {filteredProducts &&
+                filteredProducts.map((product) =>
+                  product ? (
+                    <ProductCard key={product._id} product={product} />
+                  ) : (
+                    ""
+                  )
+                )}
+            </div>
+            {(filteredProducts === null || filteredProducts.length === 0) && (
+              <div className="flex flex-col items-center w-full mt-20">
+                <img src="/emptyState/1.png" className="" alt={"empty"} />
+                <div className="text-center mt-7">
+                  <h1 className="text-xl font-bold">No Products Found</h1>
+                  <p className="text-sm text-gray-500">
+                    Try changing your filter or search again
+                  </p>
+                </div>
+              </div>
+            )}
+          </main>
+        </div>
+      </motion.div>
     </MotionFade>
   );
 }

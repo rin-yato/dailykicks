@@ -10,6 +10,8 @@ import SearchNav from "../components/SearchNav";
 import { sanityClient, urlFor } from "../sanity";
 import FilterDrawer from "../components/FilterDrawer";
 import MotionFade from "../MotionAnimation/components/MotionFade";
+import { motion } from "framer-motion";
+import Animation from "../MotionAnimation/Animation";
 
 function Brand({ brand, products, categories }) {
   const router = useRouter();
@@ -112,7 +114,7 @@ function Brand({ brand, products, categories }) {
 
   return (
     <MotionFade>
-      <div className={`bg-slate-100 h-full`}>
+      <motion.div variants={Animation.Fade} exit={{ opacity:0.2 }} transition={{ duration: 0.4 }} className={`bg-slate-100 h-full`}>
         <Category isOpen={isOpen} setIsOpen={setIsOpen} />
         <SearchNav
           isOpen={isOpen}
@@ -172,7 +174,7 @@ function Brand({ brand, products, categories }) {
             )}
           </div>
         </main>
-      </div>
+      </motion.div>
     </MotionFade>
   );
 }

@@ -22,16 +22,15 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
             >
               <div className="relative mt-10 leading-[11rem] font-thin text-white text-[15rem] text-stroke">
                 <motion.span
-                  variants={Animation.Fade}
-                  transition={{ duration: 0.5 }}
+                  variants={ Animation.Fade }
+                  transition={{ duration: 1.5 }}
                 >
                   AIR
                 </motion.span>
                 <motion.img
                   animate={{ y: "23%", x: "-50%" }}
                   initial={{ y: "23%", x: "50%" }}
-                  exit={{ y: "23%", x: "50%" }}
-                  transition={{ duration: 0.7, ease: "easeInOut", delay: 0.2 }}
+                  transition={{ duration: 0.7, delay: 0.4 }}
                   src="/sneakers/air-force-blue.png"
                   alt=""
                   className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[23%]"
@@ -39,7 +38,7 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
               </div>
               <motion.p
                 variants={Animation.SlideUp}
-                transition={{ ease: "easeInOut", delay: 0.5 }}
+                transition={{ delay: 0.7 }}
                 className="p-6 text-center font-[500] leading-snug pb-4"
               >
                 We provide the latest and greatest sneakers, with premium
@@ -47,7 +46,7 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
               </motion.p>
               <motion.div
                 variants={Animation.SlideUp}
-                transition={{ ease: "easeInOut", delay: 0.7 }}
+                transition={{ delay: 0.9 }}
               >
                 <Link href={"/sneakers"}>
                   <ButtonBase className="bg-slate-800 py-1.5 px-4 rounded font-bold text-white mmb-[75px]">
@@ -62,20 +61,20 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
             >
               <motion.h1
                 variants={Animation.SlideUp}
-                transition={{ delay: 0.9 }}
+                transition={{ delay: 1.1 }}
                 className="text-center font-extrabold text-3xl"
               >
                 Featured
               </motion.h1>
               <motion.h3
                 variants={Animation.SlideUp}
-                transition={{ delay: 1.1 }}
+                transition={{ delay: 1.3 }}
                 className="text-[10px] font-semibold text-center"
               >
                 PRODUCTS
               </motion.h3>
               <motion.div
-                variants={Animation.SlideUp} transition={{ delay: 1.3 }}
+                variants={Animation.SlideUp} transition={{ delay: 1.5 }}
                 className="featured-container grid grid-cols-2 gap-3 px-3 mt-5"
               >
                 {featuredProducts.map((sneaker) => (

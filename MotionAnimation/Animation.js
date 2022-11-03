@@ -1,3 +1,14 @@
+const easing = [0.6, .01, -.05, 0.95];
+const easing1 = [0.43, 0.13, 0.23, 0.96];
+const easing2 = [0.6, -0.05, 0.01, 0.99];
+const duration = 0.6;
+const slideUp = 40;
+const slideDown = -40;
+const right = 40;
+const left = -40;
+const stagger = 0.3;
+
+
 const Animation = {
   Fade: {
     initial: {
@@ -6,84 +17,65 @@ const Animation = {
     animate: {
       opacity: 1,
     },
-    exit: {
-      opacity: 0,
-    },
     transition: {
-      duration: 0.5,
-      ease: "easeInOut",
+      duration: duration,
+      ease: easing,
     },
   },
   SlideUp: {
     initial: {
-      y: 40,
+      y: slideUp,
       opacity: 0,
     },
     animate: {
       y: 0,
       opacity: 1,
     },
-    exit: {
-      y: 40,
-      opacity: 0,
-    },
     transition: {
-      duration: 0.7,
-      ease: "easeInOut",
+      duration: duration,
+      ease: easing,
     },
   },
   SlideDown: {
     initial: {
-      y: -100,
+      y: slideDown,
       opacity: 0,
     },
     animate: {
       y: 0,
       opacity: 1,
     },
-    exit: {
-      y: -100,
-      opacity: 0,
-    },
     transition: {
-      duration: 0.5,
-      ease: "easeInOut",
+      duration: duration,
+      ease: easing,
     },
   },
   SlideLeft: {
     initial: {
-      x: -100,
+      x: left,
       opacity: 0,
     },
     animate: {
       x: 0,
       opacity: 1,
     },
-    exit: {
-      x: -100,
-      opacity: 0,
-    },
     transition: {
-      duration: 0.5,
-      ease: "easeInOut",
+      duration: duration,
+      ease: easing,
     },
   },
   SlideRight: {
     initial: {
-      x: 100,
+      x: right,
       opacity: 0,
     },
     animate: {
       x: 0,
       opacity: 1,
     },
-    exit: {
-      x: 100,
-      opacity: 0,
-    },
     transition: {
-      duration: 0.5,
-      ease: "easeInOut",
+      duration: duration,
+      ease: easing,
     },
   },
   Scale: {
@@ -95,13 +87,9 @@ const Animation = {
       scale: 1,
       opacity: 1,
     },
-    exit: {
-      scale: 0,
-      opacity: 0,
-    },
     transition: {
-      duration: 0.5,
-      ease: "easeInOut",
+      duration: duration,
+      ease: easing,
     },
   },
   ScaleX: {
@@ -113,13 +101,9 @@ const Animation = {
       scaleX: 1,
       opacity: 1,
     },
-    exit: {
-      scaleX: 0,
-      opacity: 0,
-    },
     transition: {
-      duration: 0.5,
-      ease: "easeInOut",
+      duration: duration,
+      ease: easing,
     },
   },
   ScaleY: {
@@ -131,13 +115,9 @@ const Animation = {
       scaleY: 1,
       opacity: 1,
     },
-    exit: {
-      scaleY: 0,
-      opacity: 0,
-    },
     transition: {
-      duration: 0.5,
-      ease: "easeInOut",
+      duration: duration,
+      ease: easing,
     },
   },
   ScaleXY: {
@@ -149,13 +129,17 @@ const Animation = {
       scale: 1,
       opacity: 1,
     },
-    exit: {
-      scale: 0,
-      opacity: 0,
-    },
     transition: {
-      duration: 0.5,
-      ease: "easeInOut",
+      duration: duration,
+      ease: easing,
+    },
+  },
+  Stagger: {
+    initial: {},
+    animate: {
+      transition: {
+        staggerChildren: stagger,
+      },
     },
   },
 };
