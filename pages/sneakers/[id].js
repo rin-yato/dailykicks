@@ -151,7 +151,7 @@ function DetailProduct(props) {
                     veniam quaerat. Ut, distinctio placeat.
                   </p>
                 </div>
-                <div className="related-products my-4">
+                <div className="related-products my-4 w-full">
                   <p className="text-md mb-3 font-semibold px-7">
                     Related Products
                   </p>
