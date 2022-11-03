@@ -12,7 +12,11 @@ function About() {
     <MotionFade>
       <motion.div>
         <motion.div variants={Animation.Stagger} className="flex flex-col pt-7">
-          <motion.div variants={Animation.Scale} className="rounded-full w-1/3 mx-auto mt-2 overflow-hidden">
+          <motion.div
+            variants={Animation.Scale}
+            transition={{ duration: 0.8 }}
+            className="rounded-full w-1/3 mx-auto mt-2 overflow-hidden"
+          >
             <Image
               src="/images/logo.jpeg"
               alt="logo"
@@ -57,12 +61,6 @@ function About() {
           >
             Daily Kicks is a sneaker store that sells sneakers from different
             brands such as Nike, Adidas, Converse, New Balance, and many more.
-            {/* more. We also have a wide range accessories such as socks, laces,
-            and shoe care products. We are located in Phnom Penh, Cambodia. We
-            are open from Monday to Sunday from 10:00 AM to 8:00 PM. We also
-            have delivery services to all over Cambodia. We are also available
-            on Facebook, Instagram, and Telegram. You can contact us on our
-            social media or by phone. */}
           </motion.div>
           <motion.div
             variants={Animation.SlideUp}
@@ -81,10 +79,7 @@ function About() {
           </motion.div>
           <div className="mt-4 px-5 flex flex-col gap-4">
             <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: Transition.ease }}
-              viewport={{ once: true }}
+              variants={Animation.SlideUp}
               className="rounded-md w-full overflow-hidden"
             >
               <Image
