@@ -167,6 +167,7 @@ function index({ brands, products, categories }) {
                       width="375"
                       height="300"
                       layout="intrinsic"
+                      priority
                     />
                   </div>
                   <div className="text-center mt-5">

@@ -114,7 +114,12 @@ function Brand({ brand, products, categories }) {
 
   return (
     <MotionFade>
-      <motion.div variants={Animation.Fade} exit={{ opacity:0.2 }} transition={{ duration: 0.4 }} className={`bg-slate-100 h-full`}>
+      <motion.div
+        variants={Animation.Fade}
+        exit={{ opacity: 0.2 }}
+        transition={{ duration: 0.4 }}
+        className={`bg-slate-100 h-full`}
+      >
         <Category isOpen={isOpen} setIsOpen={setIsOpen} />
         <SearchNav
           isOpen={isOpen}
@@ -163,7 +168,17 @@ function Brand({ brand, products, categories }) {
             )}
             {filteredProducts.length === 0 && (
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-full">
-                <img src="/emptyState/1.png" className="" alt={"empty"} />
+                <div className="">
+                  <Image
+                    src="/emptyState/1.png"
+                    className=""
+                    alt={"empty"}
+                    width="375"
+                    height="300"
+                    layout="intrinsic"
+                    priority
+                  />
+                </div>
                 <div className="text-center mt-7">
                   <h1 className="text-xl font-bold">No Products Found</h1>
                   <p className="text-sm text-gray-500">

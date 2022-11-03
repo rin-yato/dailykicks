@@ -75,7 +75,11 @@ function Search() {
 
   return (
     <MotionFade>
-      <motion.div variants={Animation.Fade} exit={{ opacity:0.2 }} transition={{ duration: 0.4 }}>
+      <motion.div
+        variants={Animation.Fade}
+        exit={{ opacity: 0.2 }}
+        transition={{ duration: 0.4 }}
+      >
         <div>
           <FilterDrawer
             setFilterDrawer={setFilterDrawer}
@@ -120,15 +124,16 @@ function Search() {
             {(filteredProducts === null || filteredProducts.length === 0) && (
               <div className="flex flex-col items-center w-full mt-20">
                 <div className="">
-                    <Image
-                      src="/emptyState/1.png"
-                      className=""
-                      alt={"empty"}
-                      width="375"
-                      height="300"
-                      layout="intrinsic"
-                    />
-                  </div>
+                  <Image
+                    src="/emptyState/1.png"
+                    className=""
+                    alt={"empty"}
+                    width="375"
+                    height="300"
+                    layout="intrinsic"
+                    priority
+                  />
+                </div>
                 <div className="text-center mt-7">
                   <h1 className="text-xl font-bold">No Products Found</h1>
                   <p className="text-sm text-gray-500">

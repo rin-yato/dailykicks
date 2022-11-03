@@ -147,7 +147,7 @@ function DetailProduct(props) {
                   <p className="text-md mb-3 font-semibold px-7">
                     Related Products
                   </p>
-                  <div className="grid grid-cols-2 gap-3 w-ful px-4">
+                  <div className="grid grid-cols-2 gap-3 w-full px-4">
                     {props.sneakers.map((sneaker) => (
                       <ProductCard key={sneaker._id} product={sneaker} />
                     ))}
