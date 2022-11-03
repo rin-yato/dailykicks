@@ -9,18 +9,19 @@ import { sanityClient, urlFor } from "../sanity";
 import { motion } from "framer-motion";
 import MotionFade from "../MotionAnimation/components/MotionFade";
 import Animation from "../MotionAnimation/Animation";
+import Transition from "../MotionAnimation/Transition";
 
 export default function Home({ sneakers, newArrivals, featuredProducts }) {
   return (
     <MotionFade>
-      <motion.div>
+      <motion.div className="overflow-x-hidden">
         <Layout>
-          <main className="min-h-screen w-screen overflow-x-hidden bg-white">
+          <main className="min-h-screen w-screen overflow-x-hidden bg-white md:px-32 lg:px-40">
             <section
-              className="w-full h-[60vh] relative flex flex-col justify-end items-center mb-4"
+              className="w-full h-[60vh] overflow-hidden relative flex flex-col overflow-x-hidden justify-end items-center mb-4"
               id="hero"
             >
-              <div className="relative mt-10 leading-[11rem] font-thin text-white text-[15rem] text-stroke">
+              <div className="relative mt-10 leading-[11rem] font-thin text-white text-[15rem] text-stroke lg:scale-125">
                 <motion.span
                   variants={Animation.Fade}
                   transition={{ duration: 1.5 }}
@@ -28,9 +29,13 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
                   AIR
                 </motion.span>
                 <motion.img
-                  animate={{ y: "23%", x: "-50%" }}
-                  initial={{ y: "23%", x: "50%" }}
-                  transition={{ duration: 0.7, delay: 0.4 }}
+                  animate={{ y: "23%", x: "-50%", opacity: 1 }}
+                  initial={{ y: "23%", x: "100vw", opacity: 0 }}
+                  transition={{
+                    duration: 0.7,
+                    delay: 0.4,
+                    ease: Transition.ease1,
+                  }}
                   src="/sneakers/air-force-blue.png"
                   alt=""
                   className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[23%]"
@@ -39,7 +44,7 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
               <motion.p
                 variants={Animation.SlideUp}
                 transition={{ delay: 0.7 }}
-                className="p-6 text-center font-[500] leading-snug pb-4"
+                className="p-6 text-center font-[500] leading-snug pb-4 lg:text-xl lg:pt-10"
               >
                 We provide the latest and greatest sneakers, with premium
                 quality from the best brands.
@@ -74,12 +79,17 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
                 PRODUCTS
               </motion.h3>
               <motion.div
-                variants={Animation.SlideUp}
-                transition={{ delay: 1.5 }}
-                className="featured-container grid grid-cols-2 gap-3 px-3 mt-5"
+                variants={Animation.Stagger1}
+                className="featured-container grid grid-cols-2 gap-3 px-3 mt-5 lg:grid-cols-4 lg:gap-6 lg:mt-10"
               >
                 {featuredProducts.map((sneaker) => (
-                  <ProductCard product={sneaker} key={sneaker._id} />
+                  <motion.div
+                    key={sneaker._id}
+                    variants={Animation.SlideUp}
+                    className="cursor-pointer"
+                  >
+                    <ProductCard product={sneaker} />
+                  </motion.div>
                 ))}
               </motion.div>
             </section>
@@ -93,9 +103,11 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
               <h3 className="text-[10px] font-semibold text-center">
                 PRODUCTS
               </h3>
-              <div className="featured-container grid grid-cols-2 gap-3 px-3 mt-5">
+              <div className="featured-container grid grid-cols-2 gap-3 px-3 mt-5 lg:grid-cols-4 lg:gap-6 lg:mt-10">
                 {newArrivals.map((sneaker) => (
-                  <ProductCard key={sneaker._id} product={sneaker} />
+                  <div key={sneaker._id} className="cursor-pointer">
+                    <ProductCard product={sneaker} />
+                  </div>
                 ))}
               </div>
             </section>

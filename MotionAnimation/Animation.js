@@ -155,6 +155,14 @@ const Animation = {
       ease: easing,
     },
   },
+  Stagger1: {
+    initial: {},
+    animate: {
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  },
 };
 
 export default Animation;

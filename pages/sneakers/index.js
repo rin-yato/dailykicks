@@ -149,7 +149,7 @@ function index({ brands, products, categories }) {
                 <i className="bx bx-slider bx-sm"></i>
               </ButtonBase>
             </div>
-            <div className="product-container grid grid-cols-2 gap-4">
+            <div className="product-container grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6 lg:grid-cols-6 lg:gap-8">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.name} product={product} />
               ))}

@@ -102,10 +102,12 @@ function FilterDrawer({
         "& .MuiDrawer-paper": {
           borderTopLeftRadius: "20px",
           borderTopRightRadius: "20px",
+          justifyContent: "center",
+          alignItems: "center",
         },
       }}
     >
-      <div className="container bg-white flex flex-col px-5 py-7 items-start">
+      <div className="container bg-white flex flex-col px-5 py-7 items-center justify-center">
         <h2 className="font-bold text-lg">Filter</h2>
         <div className="flex justify-between gap-5 w-full pb-4 pt-3">
           <ButtonBase
