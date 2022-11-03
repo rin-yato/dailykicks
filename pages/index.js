@@ -30,7 +30,7 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
                 </motion.span>
                 <motion.img
                   animate={{ y: "23%", x: "-50%", opacity: 1 }}
-                  initial={{ y: "23%", x: "100vw", opacity: 0 }}
+                  initial={{ y: "23%", x: "300px", opacity: 0 }}
                   transition={{
                     duration: 0.7,
                     delay: 0.4,

@@ -102,7 +102,7 @@ function About() {
               className="rounded-md w-full overflow-hidden"
             >
               <Image
-                src="/feedback/1.jpeg"
+                src="/feedback/2.jpeg"
                 alt=""
                 layout="responsive"
                 width="100%"
@@ -118,7 +118,7 @@ function About() {
               className="rounded-md w-full overflow-hidden"
             >
               <Image
-                src="/feedback/1.jpeg"
+                src="/feedback/3.jpeg"
                 alt=""
                 layout="responsive"
                 width="100%"
@@ -134,7 +134,7 @@ function About() {
               className="rounded-md w-full overflow-hidden"
             >
               <Image
-                src="/feedback/1.jpeg"
+                src="/feedback/4.jpeg"
                 alt=""
                 layout="responsive"
                 width="100%"

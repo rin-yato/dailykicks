@@ -12,6 +12,9 @@ import { motion } from "framer-motion";
 import MotionFade from "../../MotionAnimation/components/MotionFade";
 import Image from "next/image";
 import Animation from "../../MotionAnimation/Animation";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
+import "swiper/swiper-bundle.css";
 
 function DetailProduct(props) {
   const router = useRouter();
@@ -52,7 +55,7 @@ function DetailProduct(props) {
       <motion.div className="overflow-x-hidden">
         <NoNav>
           <div className="w-screen flex flex-col">
-            <div className="flex flex-col lg:grid lg:grid-cols-2 items-center justify-center pt-[50px] pb-[80px]">
+            <div className="flex flex-col lg:grid lg:grid-cols-2 items-center justify-center pt-[50px] pb-[20px] lg:pb-0">
               <div className="fixed h-[50px] top-0 left-0 right-0 z-50 bg-white flex justify-between items-center py-1 px-3">
                 <ButtonBase
                   onClick={handleBack}
@@ -69,31 +72,40 @@ function DetailProduct(props) {
                 </ButtonBase>
               </div>
               <div className="bg-slate-200 relative flex w-screen lg:w-[50vw] lg:h-[50vw] overflow-x-scroll overflow-y-hidden no-scroll snap-x snap-mandatory">
-                <div className="flex w-max">
-                  <motion.div className="w-screen h-[100vw] snap-center lg:w-[50vw] lg:h-[50vw]">
-                    <Image
-                      src={urlFor(props.product.image).url()}
-                      width="100%"
-                      height="100%"
-                      layout="responsive"
-                      priority
-                    />
-                  </motion.div>
+                <Swiper
+                  pagination={true}
+                  modules={[Pagination]}
+                  className="mySwiper flex w-max"
+                >
+                  <SwiperSlide>
+                    <div className="w-screen h-[100vw] lg:w-[50vw] lg:h-[50vw] lg:p-10 snap-center">
+                      <Image
+                        src={urlFor(props.product.image).url()}
+                        width="100%"
+                        height="100%"
+                        layout="responsive"
+                        priority
+                        className="lg:rounded-2xl"
+                      />
+                    </div>
+                  </SwiperSlide>
                   {props.product.images &&
                     props.product.images.map((image, index) => (
-                      <div
-                        className="w-screen h-[100vw] lg:w-[50vw] lg:h-[50vw] snap-center"
-                        key={index}
-                      >
-                        <Image
-                          src={urlFor(image).url()}
-                          width="100%"
-                          height="100%"
-                          layout="responsive"
-                        />
-                      </div>
+                      <SwiperSlide key={index}>
+                        <div className="w-screen h-[100vw] lg:w-[50vw] lg:h-[50vw] lg:p-10 snap-center">
+                          <Image
+                            src={urlFor(image).url()}
+                            width="100%"
+                            height="100%"
+                            layout="responsive"
+                            priority
+                            className="lg:rounded-2xl"
+                          />
+                        </div>
+                      </SwiperSlide>
                     ))}
-                </div>
+                </Swiper>
+
                 {/* <ButtonBase className=" absolute bottom-0 left-0 m-4 min-w-min rounded-full p-1 bg-white">
                   <i
                     className="bx bxs-heart bx-sm text-slate-700"
@@ -192,7 +204,7 @@ function DetailProduct(props) {
               </div>
             </div>
             <Divider className="hidden lg:block" />
-            <div className="related-products my-4 w-full lg:mb-20 lg:mt-16">
+            <div className="related-products mb-16 my-4 w-full lg:mb-20 lg:mt-16">
               <p className="text-md mb-3 font-semibold px-7">
                 Related Products
               </p>
