@@ -1,4 +1,4 @@
-const easing = [0.6, .01, -.05, 0.95];
+const easing = [0.6, 0.01, -0.05, 0.95];
 const easing1 = [0.43, 0.13, 0.23, 0.96];
 const easing2 = [0.6, -0.05, 0.01, 0.99];
 const duration = 0.6;
@@ -6,8 +6,7 @@ const slideUp = 40;
 const slideDown = -40;
 const right = 40;
 const left = -40;
-const stagger = 0.3;
-
+const stagger = 0.1;
 
 const Animation = {
   Fade: {
@@ -142,7 +141,20 @@ const Animation = {
       },
     },
   },
+  SlideUpFromBottom: {
+    initial: {
+      y: "100%",
+      opacity: 0,
+    },
+    animate: {
+      y: 0,
+      opacity: 1,
+    },
+    transition: {
+      duration: duration,
+      ease: easing,
+    },
+  },
 };
-
 
 export default Animation;

@@ -40,7 +40,7 @@ export default function Aside() {
       onKeyDown={toggleDrawer(false)}
     >
       <Button
-        className="float-right z-30 p-1 mr-1.5 mt-1 min-w-min min-h-min rounded-full"
+        className="float-right z-30 p-1 mr-3 mt-2 min-w-min min-h-min rounded-full"
         onClick={toggleDrawer(false, 50)}
       >
         <i className="bx bx-x bx-sm text-black"></i>

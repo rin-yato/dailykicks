@@ -4,7 +4,7 @@ import Animation from "../Animation";
 
 function MotionFade({ children }) {
   return (
-    <motion.div initial="initial" animate="animate" exit="exit">
+    <motion.div initial="initial" animate="animate" exit="exit" whileInView="whileInView">
       {children}
     </motion.div>
   );
