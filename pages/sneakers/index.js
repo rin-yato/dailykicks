@@ -108,8 +108,7 @@ function index({ brands, products, categories }) {
     <MotionFade>
       <motion.div
         variants={Animation.Fade}
-        exit={{ opacity: 0.2 }}
-        transition={{ duration: 0.4 }}
+        exit={{ opacity: 0 }}
       >
         <div className={`bg-slate-100 h-full`}>
           <Category isOpen={isOpen} setIsOpen={setIsOpen} />

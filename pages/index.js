@@ -13,7 +13,7 @@ import Animation from "../MotionAnimation/Animation";
 export default function Home({ sneakers, newArrivals, featuredProducts }) {
   return (
     <MotionFade>
-      <div>
+      <motion.div exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
         <Layout>
           <main className="min-h-screen w-screen overflow-x-hidden bg-white">
             <section
@@ -22,7 +22,7 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
             >
               <div className="relative mt-10 leading-[11rem] font-thin text-white text-[15rem] text-stroke">
                 <motion.span
-                  variants={ Animation.Fade }
+                  variants={Animation.Fade}
                   transition={{ duration: 1.5 }}
                 >
                   AIR
@@ -74,7 +74,8 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
                 PRODUCTS
               </motion.h3>
               <motion.div
-                variants={Animation.SlideUp} transition={{ delay: 1.5 }}
+                variants={Animation.SlideUp}
+                transition={{ delay: 1.5 }}
                 className="featured-container grid grid-cols-2 gap-3 px-3 mt-5"
               >
                 {featuredProducts.map((sneaker) => (
@@ -100,7 +101,7 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
             </section>
           </main>
         </Layout>
-      </div>
+      </motion.div>
     </MotionFade>
   );
 }

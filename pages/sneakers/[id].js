@@ -51,8 +51,7 @@ function DetailProduct(props) {
     <MotionFade>
       <motion.div
         variants={Animation.Fade}
-        exit={{ opacity: 0.2 }}
-        transition={{ duration: 0.3 }}
+        exit={{ opacity: 0 }}
       >
         <NoNav>
           <div className="w-screen flex flex-col">
