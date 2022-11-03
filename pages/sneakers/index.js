@@ -11,6 +11,7 @@ import FilterDrawer from "../../components/FilterDrawer";
 import { motion } from "framer-motion";
 import Animation from "../../MotionAnimation/Animation";
 import MotionFade from "../../MotionAnimation/components/MotionFade";
+import Image from "next/image";
 
 function index({ brands, products, categories }) {
   const router = useRouter();
@@ -105,7 +106,11 @@ function index({ brands, products, categories }) {
 
   return (
     <MotionFade>
-      <motion.div variants={Animation.Fade} exit={{ opacity:0.2 }} transition={{ duration: 0.4 }}>
+      <motion.div
+        variants={Animation.Fade}
+        exit={{ opacity: 0.2 }}
+        transition={{ duration: 0.4 }}
+      >
         <div className={`bg-slate-100 h-full`}>
           <Category isOpen={isOpen} setIsOpen={setIsOpen} />
           <SearchNav
@@ -154,8 +159,17 @@ function index({ brands, products, categories }) {
               ))}
               {filteredProducts.length === 0 && (
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-full">
-                  <img src="/emptyState/1.png" className="" alt={"empty"} />
-                  <div className="text-center mt-7">
+                  <div className="">
+                    <Image
+                      src="/emptyState/1.png"
+                      className=""
+                      alt={"empty"}
+                      width="375"
+                      height="300"
+                      layout="intrinsic"
+                    />
+                  </div>
+                  <div className="text-center mt-5">
                     <h1 className="text-xl font-bold">No Products Found</h1>
                     <p className="text-sm text-gray-500">
                       Try changing your filter or search again

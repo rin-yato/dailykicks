@@ -10,6 +10,7 @@ import { urlFor, sanityClient } from "../../sanity";
 import ProductCard from "../../components/ProductCard";
 import { motion } from "framer-motion";
 import MotionFade from "../../MotionAnimation/components/MotionFade";
+import Image from "next/image";
 
 function DetailProduct(props) {
   const router = useRouter();
@@ -66,20 +67,27 @@ function DetailProduct(props) {
                   <i className="bx bxs-share-alt bx-sm text-black"></i>
                 </ButtonBase>
               </div>
-              <div className="bg-slate-200 relative overflow-x-scroll snap-x snap-mandatory">
-                <div className="flex">
-                  <img
-                    src={urlFor(props.product.image).url()}
-                    className="snap-center"
-                  />
+              <div className="bg-slate-200 relative flex w-screen overflow-x-scroll snap-x snap-mandatory">
+                <div className="flex w-max">
+                  <div className="w-screen h-[100vw] snap-center">
+                    <Image
+                      src={urlFor(props.product.image).url()}
+                      width="100%"
+                      height="100%"
+                      layout="responsive"
+                      priority
+                    />
+                  </div>
                   {props.product.images &&
                     props.product.images.map((image, index) => (
-                      <img
-                        src={urlFor(image).url()}
-                        className="snap-center"
-                        alt="image"
-                        key={index}
-                      />
+                      <div className="w-screen h-[100vw] snap-center" key={index}>
+                        <Image
+                          src={urlFor(image).url()}
+                          width="100%"
+                          height="100%"
+                          layout="responsive"
+                        />
+                      </div>
                     ))}
                 </div>
                 {/* <ButtonBase className=" absolute bottom-0 left-0 m-4 min-w-min rounded-full p-1 bg-white">
@@ -129,10 +137,10 @@ function DetailProduct(props) {
                 <div className="my-4 px-7">
                   <p className="text-md font-semibold mb-1">Description</p>
                   <p className="text-sm text-slate-400">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-                    ad fugiat nemo facilis provident. Dolores hic facere, impedit
-                    suscipit eos voluptatem assumenda illum libero, sit, veniam
-                    quaerat. Ut, distinctio placeat.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Fuga ad fugiat nemo facilis provident. Dolores hic facere,
+                    impedit suscipit eos voluptatem assumenda illum libero, sit,
+                    veniam quaerat. Ut, distinctio placeat.
                   </p>
                 </div>
                 <div className="related-products my-4">

@@ -7,6 +7,7 @@ import FilterDrawer from "../components/FilterDrawer";
 import { motion } from "framer-motion";
 import Animation from "../MotionAnimation/Animation";
 import MotionFade from "../MotionAnimation/components/MotionFade";
+import Image from "next/image";
 
 function Search() {
   const [results, setResults] = useState([]);
@@ -118,7 +119,16 @@ function Search() {
             </div>
             {(filteredProducts === null || filteredProducts.length === 0) && (
               <div className="flex flex-col items-center w-full mt-20">
-                <img src="/emptyState/1.png" className="" alt={"empty"} />
+                <div className="">
+                    <Image
+                      src="/emptyState/1.png"
+                      className=""
+                      alt={"empty"}
+                      width="375"
+                      height="300"
+                      layout="intrinsic"
+                    />
+                  </div>
                 <div className="text-center mt-7">
                   <h1 className="text-xl font-bold">No Products Found</h1>
                   <p className="text-sm text-gray-500">

@@ -2,13 +2,21 @@
 import React from "react";
 import Link from "next/link";
 import { urlFor } from "../sanity";
+import Image from "next/image";
 
 function ProductCard({ product }) {
   return (
     <Link href={`/sneakers/${product._id}`}>
       <div className="product-card">
         <div className="product-image overflow-hidden rounded-lg">
-          <img src={urlFor(product.image).url()} alt="" />
+          <Image
+            src={urlFor(product.image).url()}
+            alt=""
+            width="100%"
+            height="100%"
+            layout="responsive"
+            objectFit="contain"
+          />
         </div>
         <div className="product-info py-0.5 px-1.5">
           <h1 className="product-name text-sm font-semibold">
