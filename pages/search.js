@@ -78,7 +78,7 @@ function Search() {
       <motion.div
         variants={Animation.Fade}
         exit={{ opacity: 0.2 }}
-        transition={{ duration: 0.4 }}
+        transition={{ duration: 0.3 }}
       >
         <div>
           <FilterDrawer

@@ -11,6 +11,7 @@ import ProductCard from "../../components/ProductCard";
 import { motion } from "framer-motion";
 import MotionFade from "../../MotionAnimation/components/MotionFade";
 import Image from "next/image";
+import Animation from "../../MotionAnimation/Animation";
 
 function DetailProduct(props) {
   const router = useRouter();
@@ -48,7 +49,11 @@ function DetailProduct(props) {
 
   return (
     <MotionFade>
-      <div>
+      <motion.div
+        variants={Animation.Fade}
+        exit={{ opacity: 0.2 }}
+        transition={{ duration: 0.3 }}
+      >
         <NoNav>
           <div className="w-screen flex flex-col">
             <div className="flex flex-col items-center justify-center pt-[50px] pb-[80px]">
@@ -80,7 +85,10 @@ function DetailProduct(props) {
                   </div>
                   {props.product.images &&
                     props.product.images.map((image, index) => (
-                      <div className="w-screen h-[100vw] snap-center" key={index}>
+                      <div
+                        className="w-screen h-[100vw] snap-center"
+                        key={index}
+                      >
                         <Image
                           src={urlFor(image).url()}
                           width="100%"
@@ -173,7 +181,7 @@ function DetailProduct(props) {
             </div>
           </div>
         </NoNav>
-      </div>
+      </motion.div>
     </MotionFade>
   );
 }

@@ -12,7 +12,7 @@ function About() {
     <MotionFade>
       <motion.div>
         <motion.div variants={Animation.Stagger} className="flex flex-col pt-7">
-          <div className="rounded-full w-1/3 mx-auto mt-2 overflow-hidden">
+          <motion.div variants={Animation.Scale} className="rounded-full w-1/3 mx-auto mt-2 overflow-hidden">
             <Image
               src="/images/logo.jpeg"
               alt="logo"
@@ -21,7 +21,7 @@ function About() {
               height={100}
               priority
             />
-          </div>
+          </motion.div>
           <motion.div
             variants={Animation.Stagger}
             className="mx-auto font-semibold mt-2 flex overflow-hidden"

@@ -10,7 +10,12 @@ function SearchInput({ setResults }) {
 
   const handleBack = () => {
     // check if last history is daily-kicks
-    if ((window.location.href.includes("dailykicks") || window.location.href.includes("127.0.0.1") || window.location.href.includes('localhost')) && window.history.length > 1) {
+    if (
+      (window.location.href.includes("dailykicks") ||
+        window.location.href.includes("127.0.0.1") ||
+        window.location.href.includes("localhost")) &&
+      window.history.length > 1
+    ) {
       router.back();
     } else {
       router.push("/");
@@ -62,8 +67,8 @@ function SearchInput({ setResults }) {
           <input
             ref={inputRef}
             type="text"
-            onKeyDown={ handleGo }
-            onChange={ handleInput }
+            onKeyDown={handleGo}
+            onChange={handleInput}
             placeholder="Search"
             className="bg-slate-100 w-full py-1.5 px-4 appearance-none rounded-full focus:outline-none"
           />
