@@ -12,6 +12,7 @@ import FilterDrawer from "../components/FilterDrawer";
 import MotionFade from "../MotionAnimation/components/MotionFade";
 import { motion } from "framer-motion";
 import Animation from "../MotionAnimation/Animation";
+import Image from "next/image";
 
 function Brand({ brand, products, categories }) {
   const router = useRouter();
