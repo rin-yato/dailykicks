@@ -29,10 +29,10 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
                   AIR
                 </motion.span>
                 <motion.img
-                  animate={{ y: "23%", x: "-50%", opacity: 1 }}
+                  animate={{ x: "-50%", opacity: 1 }}
                   initial={{ y: "23%", x: "300px", opacity: 0 }}
                   transition={{
-                    duration: 0.7,
+                    duration: 0.5,
                     delay: 0.4,
                     ease: Transition.ease2,
                   }}
