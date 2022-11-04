@@ -32,8 +32,8 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
                   animate={{ x: "-50%", opacity: 1 }}
                   initial={{ y: "23%", x: "300px", opacity: 0 }}
                   transition={{
-                    duration: 0.5,
-                    delay: 0.4,
+                    duration: 0.3,
+                    delay: 0.2,
                     ease: Transition.ease2,
                   }}
                   src="/sneakers/air-force-blue.png"
