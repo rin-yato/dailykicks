@@ -11,7 +11,6 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <title>Daily Kicks</title>
           <link rel="icon" href="/images/favicon.png" />
           <link
             rel="stylesheet"

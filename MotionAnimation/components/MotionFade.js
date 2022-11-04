@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Animation from "../Animation";
 import Transition from "../Transition";
+import Head from "next/head";
 
 function MotionFade({ children }) {
   return (
@@ -12,6 +13,9 @@ function MotionFade({ children }) {
       whileInView="whileInView"
       transition="transition"
     >
+      <Head>
+        <title>DailyKicks</title>
+      </Head>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

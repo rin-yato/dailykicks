@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { ButtonBase } from "@mui/material";
-import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "../components/ProductCard";
 import Layout from "../layouts/Layout";
-import { sanityClient, urlFor } from "../sanity";
+import { sanityClient } from "../sanity";
 import { motion } from "framer-motion";
 import MotionFade from "../MotionAnimation/components/MotionFade";
 import Animation from "../MotionAnimation/Animation";
@@ -28,18 +27,21 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
                 >
                   AIR
                 </motion.span>
-                <motion.img
-                  animate={{ x: "-50%", opacity: 1 }}
+                <motion.div
                   initial={{ y: "23%", x: "300px", opacity: 0 }}
+                  animate={{ x: "0%", opacity: 1 }}
                   transition={{
                     duration: 0.3,
                     delay: 0.2,
                     ease: Transition.ease2,
                   }}
-                  src="/sneakers/air-force-blue.png"
-                  alt=""
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[23%]"
-                />
+                >
+                  <img
+                    src="/sneakers/air-force-blue.png"
+                    alt=""
+                    className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[23%]"
+                  />
+                </motion.div>
               </div>
               <motion.p
                 variants={Animation.SlideUp}
