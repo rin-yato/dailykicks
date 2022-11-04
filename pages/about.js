@@ -85,7 +85,7 @@ function About() {
               variants={Animation.SlideUp}
               className="rounded-md w-full overflow-hidden"
             >
-              <Image
+              <img
                 src="/feedback/1.jpeg"
                 alt=""
                 layout="responsive"

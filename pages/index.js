@@ -14,7 +14,7 @@ import Transition from "../MotionAnimation/Transition";
 export default function Home({ sneakers, newArrivals, featuredProducts }) {
   return (
     <MotionFade>
-      <motion.div className="overflow-x-hidden">
+      <div className="overflow-x-hidden">
         <Layout>
           <main className="min-h-screen w-screen overflow-x-hidden bg-white md:px-32 lg:px-40">
             <section
@@ -24,7 +24,7 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
               <div className="relative mt-10 leading-[11rem] font-thin text-white text-[15rem] text-stroke lg:scale-125">
                 <motion.span
                   variants={Animation.Fade}
-                  transition={{ duration: 1.5 }}
+                  transition={{ duration: 1.5, ease: Transition.ease4 }}
                 >
                   AIR
                 </motion.span>
@@ -34,7 +34,7 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
                   transition={{
                     duration: 0.7,
                     delay: 0.4,
-                    ease: Transition.ease1,
+                    ease: Transition.ease2,
                   }}
                   src="/sneakers/air-force-blue.png"
                   alt=""
@@ -43,7 +43,7 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
               </div>
               <motion.p
                 variants={Animation.SlideUp}
-                transition={{ delay: 0.7 }}
+                transition={{ delay: 0.7, ease: Transition.ease4 }}
                 className="p-6 text-center font-[500] leading-snug pb-4 lg:text-xl lg:pt-10"
               >
                 We provide the latest and greatest sneakers, with premium
@@ -51,7 +51,7 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
               </motion.p>
               <motion.div
                 variants={Animation.SlideUp}
-                transition={{ delay: 0.9 }}
+                transition={{ delay: 0.9, ease: Transition.ease4 }}
               >
                 <Link href={"/sneakers"}>
                   <ButtonBase className="bg-slate-800 py-1.5 px-4 rounded font-bold text-white mmb-[75px]">
@@ -66,14 +66,14 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
             >
               <motion.h1
                 variants={Animation.SlideUp}
-                transition={{ delay: 1.1 }}
+                transition={{ delay: 1.1, ease: Transition.ease4 }}
                 className="text-center font-extrabold text-3xl"
               >
                 Featured
               </motion.h1>
               <motion.h3
                 variants={Animation.SlideUp}
-                transition={{ delay: 1.3 }}
+                transition={{ delay: 1.3, ease: Transition.ease4 }}
                 className="text-[10px] font-semibold text-center"
               >
                 PRODUCTS
@@ -86,7 +86,7 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
                   <motion.div
                     key={sneaker._id}
                     variants={Animation.SlideUp}
-                    className="cursor-pointer"
+                    transition={{ ease: Transition.ease4 }}
                   >
                     <ProductCard product={sneaker} />
                   </motion.div>
@@ -113,7 +113,7 @@ export default function Home({ sneakers, newArrivals, featuredProducts }) {
             </section>
           </main>
         </Layout>
-      </motion.div>
+      </div>
     </MotionFade>
   );
 }
