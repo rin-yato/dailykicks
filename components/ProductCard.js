@@ -9,7 +9,7 @@ function ProductCard({ product }) {
     <Link href={`/sneakers/${product._id}`}>
       <div className="product-card cursor-pointer">
         <div className="product-image overflow-hidden rounded-lg">
-          <Image
+          <img
             src={urlFor(product.image).url()}
             alt=""
             width="100%"
